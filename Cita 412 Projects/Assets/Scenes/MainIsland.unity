@@ -380,13 +380,35 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6232535752338084650, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: m_text
+      value: 'Elemental Islands:
+
+        The Quest For Balance'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 276.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 401.977
+      objectReference: {fileID: 0}
     - target: {fileID: 6232535752559315737, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6232535752559315737, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6232535752860546198, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
       propertyPath: m_RootOrder
@@ -438,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6232535752860546199, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
@@ -452,6 +474,10 @@ PrefabInstance:
     - target: {fileID: 8773529242141350871, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_Name
       value: HUDCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773529242141350871, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8773529242141350875, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_Pivot.x
@@ -543,11 +569,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773529243512860887, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 8773529243512860887, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
