@@ -7,14 +7,11 @@ using TMPro;
 
 public class LevelLoader : MonoBehaviour
 {
-    // Scene index to load
-    [SerializeField] int SceneIndex = 0;
-
     // Progress of async loading
     float LoadProgress = 0f;
 
     // Canvas' to show and hide during loading
-    [SerializeField] GameObject CanvasToHide;
+    [SerializeField] GameObject[] CanvasToHide;
     [SerializeField] GameObject LoadingCanvas;
 
     // Slider to show load progress to player
@@ -22,14 +19,16 @@ public class LevelLoader : MonoBehaviour
     // Text to display load progress to player
     [SerializeField] TextMeshProUGUI LoadingProgressText;
 
-    public void ClickPlayButton() {
+    public void LoadScene(int SceneIndex) {
         // Start scene loading coroutine
         StartCoroutine(StartLoadingScreen(SceneIndex));
     }
 
     IEnumerator StartLoadingScreen(int SceneIndex) {
-        // Disable main canvas and enable loading canvas
-        CanvasToHide.SetActive(false);
+        // Disable all canvas' and enable loading canvas
+        foreach (GameObject canvas in CanvasToHide) {
+            canvas.SetActive(false);
+        }
         LoadingCanvas.SetActive(true);
         
         // Start asycronously loading the next scene
@@ -46,7 +45,7 @@ public class LevelLoader : MonoBehaviour
             // Set slider value to loading progress value
             LoadingProgressSlider.value = LoadProgress;
             // Set text value to loading progress value
-            LoadingProgressText.text = "Loading..." + Mathf.Round(LoadProgress * 100).ToString();
+            LoadingProgressText.text = Mathf.Round(LoadProgress * 100).ToString();
 
             // Waiting for loading to complete
             yield return null;
