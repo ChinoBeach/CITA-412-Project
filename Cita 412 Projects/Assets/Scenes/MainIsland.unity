@@ -369,6 +369,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1691647669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8773529242141350871, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+  m_PrefabInstance: {fileID: 8773529243821942114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6232535753049089261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -380,36 +385,14 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6232535752338084650, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_text
-      value: 'Elemental Islands:
-
-        The Quest For Balance'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 276.046
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00038146973
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232535752338084651, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 401.977
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232535752559315737, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6232535752559315737, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 6232535752860546193, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: CanvasToHide
+      value: 
+      objectReference: {fileID: 1691647669}
+    - target: {fileID: 6232535752860546193, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
+      propertyPath: CanvasToHide.Array.data[0]
+      value: 
+      objectReference: {fileID: 1691647669}
     - target: {fileID: 6232535752860546198, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -458,10 +441,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
-    - target: {fileID: 6232535752860546199, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4c72fa2c537964298210654bd92949, type: 3}
 --- !u!1001 &8773529243821942114
@@ -477,7 +456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773529242141350871, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8773529242141350875, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_Pivot.x
@@ -569,11 +548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8773529243512860887, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.63
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8773529243512860887, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
