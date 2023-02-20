@@ -21,18 +21,38 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = 9.81f;
     [SerializeField] private float rotationSpeed = 3f;
+
+    // Input Actions asset
+    public PlayerInputActions playerControls;
+
+    // Movement input direction vector
+    Vector2 moveDirection = Vector2.zero;
+
+    // Input action from PlayerInputActions assets
+    private InputAction movementInput;
     #endregion
 
     #region Unity Methods
 
+    void Awake()
+    {
+        playerControls = new PlayerInputActions();
+    }
+
+    void OnEnable()
+    {
+        movementInput = playerControls.Player.Move;
+        movementInput.Enable();
+    }
+
+    void OnDisable()
+    {
+        movementInput.Disable();
+    }
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
-    }
-
-    public void OnMove(InputValue value)
-    {
-        var v = value.Get<Vector2>();
     }
 
     void Update()
@@ -58,9 +78,11 @@ public class PlayerController : MonoBehaviour
         // apply gravity always, to let us track down ramps properly
         verticalVelocity -= gravityValue * Time.deltaTime;
 
+        // Get movement input vector2
+        moveDirection = movementInput.ReadValue<Vector2>();
 
         // gather lateral input control
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(moveDirection.x, 0, moveDirection.y);
 
         // scale by speed
         move *= playerSpeed;
@@ -74,18 +96,18 @@ public class PlayerController : MonoBehaviour
         }
 
         // allow jump as long as the player is on the ground
-        if (Input.GetButtonDown("Jump"))
-        {
-            // must have been grounded recently to allow jump
-            if (groundedTimer > 0)
-            {
-                // no more until we recontact ground
-                groundedTimer = 0;
+        // if (Input.GetButtonDown("Jump"))
+        // {
+        //     // must have been grounded recently to allow jump
+        //     if (groundedTimer > 0)
+        //     {
+        //         // no more until we recontact ground
+        //         groundedTimer = 0;
 
-                // Physics dynamics formula for calculating jump up velocity based on height and gravity
-                verticalVelocity = Mathf.Sqrt(jumpHeight * 2 * gravityValue);
-            }
-        }
+        //         // Physics dynamics formula for calculating jump up velocity based on height and gravity
+        //         verticalVelocity = Mathf.Sqrt(jumpHeight * 2 * gravityValue);
+        //     }
+        // }
 
         // inject Y velocity before we use it
         move.y = verticalVelocity;
