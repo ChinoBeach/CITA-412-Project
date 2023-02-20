@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     // Input action from PlayerInputActions assets
     private InputAction movementInput;
+    private InputAction jumpInput;
     #endregion
 
     #region Unity Methods
@@ -43,11 +44,16 @@ public class PlayerController : MonoBehaviour
     {
         movementInput = playerControls.Player.Move;
         movementInput.Enable();
+
+        jumpInput = playerControls.Player.Jump;
+        jumpInput.Enable();
+        jumpInput.performed += Jump;
     }
 
     void OnDisable()
     {
         movementInput.Disable();
+        jumpInput.Disable();
     }
 
     void Start()
@@ -120,6 +126,9 @@ public class PlayerController : MonoBehaviour
 
     #region Private Methods
     // Private Methods.
+    private void Jump(InputAction.CallbackContext context) {
+        Debug.Log("Jump");
+    }
     
     #endregion
 
