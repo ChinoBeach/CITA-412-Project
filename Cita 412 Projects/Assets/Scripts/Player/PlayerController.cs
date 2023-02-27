@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,8 +11,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+
     // Variables.
     private CharacterController controller;
+
     private float verticalVelocity;
     private float groundedTimer;        // to allow jumping when going down ramps
     [SerializeField] private float playerSpeed = 2.0f;
@@ -26,21 +26,26 @@ public class PlayerController : MonoBehaviour
     public PlayerInputActions playerControls;
 
     // Movement input direction vector
-    Vector2 moveDirection = Vector2.zero;
+    private Vector2 moveInput = Vector2.zero;
 
     // Input action from PlayerInputActions assets
     private InputAction movementInput;
+
     private InputAction jumpInput;
-    #endregion
+
+    //assuming we only using the single camera:
+    private Camera cam;
+
+    #endregion Variables
 
     #region Unity Methods
 
-    void Awake()
+    private void Awake()
     {
         playerControls = new PlayerInputActions();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         movementInput = playerControls.Player.Move;
         movementInput.Enable();
@@ -50,18 +55,19 @@ public class PlayerController : MonoBehaviour
         jumpInput.performed += Jump;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         movementInput.Disable();
         jumpInput.Disable();
     }
 
-    void Start()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
+        cam = Camera.main;
     }
 
-    void Update()
+    private void Update()
     {
         bool groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
@@ -85,10 +91,22 @@ public class PlayerController : MonoBehaviour
         verticalVelocity -= gravityValue * Time.deltaTime;
 
         // Get movement input vector2
-        moveDirection = movementInput.ReadValue<Vector2>();
+        moveInput = movementInput.ReadValue<Vector2>();
 
         // gather lateral input control
-        Vector3 move = new Vector3(moveDirection.x, 0, moveDirection.y);
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+
+        //camera forward and right vectors:
+        var forward = cam.transform.forward;
+        var right = cam.transform.right;
+
+        //project forward and right vectors on the horizontal plane (y = 0)
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        move = forward * move.z + right * move.x;
 
         // scale by speed
         move *= playerSpeed;
@@ -101,20 +119,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // allow jump as long as the player is on the ground
-        // if (Input.GetButtonDown("Jump"))
-        // {
-        //     // must have been grounded recently to allow jump
-        //     if (groundedTimer > 0)
-        //     {
-        //         // no more until we recontact ground
-        //         groundedTimer = 0;
-
-        //         // Physics dynamics formula for calculating jump up velocity based on height and gravity
-        //         verticalVelocity = Mathf.Sqrt(jumpHeight * 2 * gravityValue);
-        //     }
-        // }
-
         // inject Y velocity before we use it
         move.y = verticalVelocity;
 
@@ -122,18 +126,52 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * Time.deltaTime);
     }
 
-    #endregion
+    #endregion Unity Methods
 
     #region Private Methods
+
     // Private Methods.
-    private void Jump(InputAction.CallbackContext context) {
+    private void Jump(InputAction.CallbackContext context)
+    {
         Debug.Log("Jump");
+        // allow jump as long as the player is on the ground
+        // must have been grounded recently to allow jump
+        if (groundedTimer > 0)
+        {
+            // no more until we recontact ground
+            groundedTimer = 0;
+
+            // Physics dynamics formula for calculating jump up velocity based on height and gravity
+            verticalVelocity = Mathf.Sqrt(jumpHeight * 2 * gravityValue);
+        }
     }
-    
-    #endregion
+
+    private Vector3 CalculateLateralMovement()
+    {
+        //camera forward and right vectors:
+        var forward = cam.transform.forward;
+        var right = cam.transform.right;
+
+        //project forward and right vectors on the horizontal plane (y = 0)
+        forward.y = 0;
+        forward.Normalize();
+
+        right.y = 0;
+        right.Normalize();
+
+        var forwardRelative = moveInput.y * forward;
+        var rightRelative = moveInput.x * right;
+
+        var relativeMove = forwardRelative + rightRelative;
+
+        return new Vector3(relativeMove.z, 0, relativeMove.x);
+    }
+
+    #endregion Private Methods
 
     #region Public Methods
+
     // Public Methods.
-    
-    #endregion
+
+    #endregion Public Methods
 }
