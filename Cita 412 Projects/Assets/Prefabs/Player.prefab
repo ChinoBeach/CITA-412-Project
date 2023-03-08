@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c94a74f99c0325a41be8c65d32a3b907, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,11 +134,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundSpeed: 10
   airSpeed: 7
+  jumpDelay: 0.2
   jumpHeight: 3
-  doubleJumpHeight: 1
-  jumpModifier: -3
+  maxMultiJumps: 1
+  multiJumpHeight: 2
   gravity: -20
-  hasDoubleJump: 1
   dashSpeed: 0
   dashDir: {x: 0, y: 0, z: 0}
   dashVelocity: {x: 0, y: 0, z: 0}

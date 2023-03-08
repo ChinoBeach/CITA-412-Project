@@ -26,7 +26,6 @@ public class Upgrade : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
