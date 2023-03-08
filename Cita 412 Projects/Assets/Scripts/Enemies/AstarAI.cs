@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 // Note this line, if it is left out, the script won't know that the class 'Path' exists and it will throw compiler errors
 // This line should always be present at the top of scripts which use pathfinding
@@ -5,6 +6,8 @@ using Pathfinding;
 
 [HelpURL("http://arongranberg.com/astar/documentation/stable/class_partial1_1_1_astar_a_i.php")]
 public class AstarAI : MonoBehaviour {
+    [SerializeField] float targetResetTimer;
+
     public Transform targetPosition;
 
     private Seeker seeker;
@@ -50,6 +53,43 @@ public class AstarAI : MonoBehaviour {
     }
 
     public void Update () {
+        // Do nothing if there is no target
+        if (!targetPosition) return;
+
+        GoToTarget();
+    }
+
+    void OnTriggerStay(Collider collider) {
+        // If the collided object is the player
+        if (collider.gameObject.tag == "Player") {
+            // Stop the coroutine that removes the target object
+            StopCoroutine(ResetTarget());
+
+            // If there is not already a target object set the target to the collided object
+            if (!targetPosition) SetTarget(collider.transform);
+        }
+    }
+
+    void OnTriggerExit(Collider collider) {
+        // If the exited object is the target object start timer to reset target variable
+        if (collider.gameObject.tag == targetPosition.tag) StartCoroutine(ResetTarget());
+    }
+
+    // Sets the target transform
+    public void SetTarget(Transform targetPosition) {
+        this.targetPosition = targetPosition;
+    }
+
+    // Method to "forget" the target object by setting it to null after a set amount of time
+    IEnumerator ResetTarget() {
+        // Wait for a specified amount of time
+        yield return new WaitForSeconds(targetResetTimer);
+        
+        // Set target object to null to stop following
+        SetTarget(null);
+    }
+
+    void GoToTarget() {
         if (Time.time > lastRepath + repathRate && seeker.IsDone()) {
             lastRepath = Time.time;
 
@@ -101,8 +141,5 @@ public class AstarAI : MonoBehaviour {
         // Move the agent using the CharacterController component
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
         controller.SimpleMove(velocity);
-
-        // If you are writing a 2D game you may want to remove the CharacterController and instead modify the position directly
-        // transform.position += velocity * Time.deltaTime;
     }
 }
