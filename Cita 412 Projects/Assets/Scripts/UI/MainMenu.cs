@@ -9,21 +9,26 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject creditsScreen;
     [SerializeField] GameObject menuScreen;
     [SerializeField] GameObject exitScreen;
+    [SerializeField] GameObject optionScreen;
     #endregion
 
     #region Public Methods
+    // Public Methods.
+
     public void NewGame()
     {
-        // TODO: Load the next scene
+        // TODO: Load the main scene
     }
 
     public void ContinueGame()
     {
-        // TODO: Load save file in player prefs 
+        // TODO: Load save file in player prefs and load main scene
     }
     public void OptionsButton()
     {
         // TODO: option moment
+        menuScreen.SetActive(false);
+        optionScreen.SetActive(true);
     }
 
     public void CreditsButton()
@@ -38,7 +43,6 @@ public class MainMenu : MonoBehaviour
         menuScreen.SetActive(true);
     }
 
-    // Public Methods.
     public void ExitButton()
     {
         exitScreen.SetActive(true);

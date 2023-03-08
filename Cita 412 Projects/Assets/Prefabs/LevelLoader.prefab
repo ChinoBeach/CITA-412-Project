@@ -94,7 +94,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6232535751361526210
 RectTransform:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6232535752860546198
 Transform:
   m_ObjectHideFlags: 0
@@ -776,8 +776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4780b143eefc24e88e496bcb5afb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneIndex: 0
-  CanvasToHide: {fileID: 0}
+  CanvasToHide:
+  - {fileID: 0}
   LoadingCanvas: {fileID: 6232535751361526211}
   LoadingProgressSlider: {fileID: 6232535752249577163}
   LoadingProgressText: {fileID: 6232535752485674556}
