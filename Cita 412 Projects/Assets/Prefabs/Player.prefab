@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 2729623321306919198}
   - component: {fileID: 2729623321306919171}
   - component: {fileID: 2729623321306919170}
-  m_Layer: 0
+  - component: {fileID: 414698259486099617}
+  - component: {fileID: 3903659893203802295}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -130,7 +132,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af3db96130675f4999b0e8ea57f0830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2
-  jumpHeight: 1
-  gravityValue: 9.81
-  rotationSpeed: 3
+  groundSpeed: 10
+  airSpeed: 7
+  jumpHeight: 3
+  doubleJumpHeight: 1
+  jumpModifier: -3
+  gravity: -20
+  hasDoubleJump: 1
+  dashSpeed: 0
+  dashDir: {x: 0, y: 0, z: 0}
+  dashVelocity: {x: 0, y: 0, z: 0}
+  hasDash: 1
+  isDashing: 0
+--- !u!114 &414698259486099617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729623321306919193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ae4f832abcd22d84f9f7f40ed8fd9e05, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &3903659893203802295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729623321306919193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929d1eb81fbe7ad4a90b9d509bc9716c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownDash: 0
