@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949609383}
   - component: {fileID: 949609382}
+  - component: {fileID: 949609384}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -315,6 +316,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &949609384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949609381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1597944414
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 607810839334498115, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.343
       objectReference: {fileID: 0}
     - target: {fileID: 607810839334498115, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
       propertyPath: m_LocalRotation.w
@@ -729,5 +750,9 @@ PrefabInstance:
       propertyPath: levelLoader
       value: 
       objectReference: {fileID: 6232535753049089262}
+    - target: {fileID: 7772861743594646173, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a6157d18966b764ba7be8645d6eed97, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
