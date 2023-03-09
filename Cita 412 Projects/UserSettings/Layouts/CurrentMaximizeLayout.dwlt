@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 6380
+  controlID: 19102
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 6381
+  controlID: 19063
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 6382
+  controlID: 19064
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,10 +224,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 121.33334}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0efbffff266e00002a6e0000
+      m_ExpandedIDs: 0efbffff266e00002a6e0000a26e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -535,9 +535,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 3, z: 0}
+    m_Target: {x: 355.8, y: 111.2, z: 169.92001}
     speed: 2
-    m_Value: {x: 0, y: 3, z: 0}
+    m_Value: {x: 355.8, y: 111.2, z: 169.92001}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -584,13 +584,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0398692, y: 0.33830056, z: 0.014064302, w: -0.9401846}
+    m_Target: {x: 0.20616211, y: -0.7278465, z: 0.24846472, w: 0.60514116}
     speed: 2
-    m_Value: {x: 0.03986558, y: 0.33826983, z: 0.014063024, w: -0.9400992}
+    m_Value: {x: 0.20614213, y: -0.727776, z: 0.24844064, w: 0.6050825}
   m_Size:
-    m_Target: 10
+    m_Target: 13.529441
     speed: 2
-    m_Value: 10
+    m_Value: 13.529441
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -709,13 +709,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials/ChinosTemp
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials/ChinosTemp
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Chino\OneDrive - SUNY Morrisville\Desktop\CITA 412\CITA-412-Project\Cita
     412 Projects
@@ -723,9 +723,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 60720000
-    m_LastClickedID: 29280
-    m_ExpandedIDs: 00000000547000005e72000062720000
+    m_SelectedIDs: 6a720000
+    m_LastClickedID: 29290
+    m_ExpandedIDs: 00000000547000005e720000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -778,8 +778,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 146e0000
-    m_LastClickedInstanceID: 28180
+    m_SelectedInstanceIDs: f8a8feff
+    m_LastClickedInstanceID: -87816
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000bedb0000
     m_RenameOverlay:
@@ -856,8 +856,8 @@ MonoBehaviour:
     y: 0
     width: 303.3333
     height: 627.3333
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -897,7 +897,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 28180
+  m_LastInspectedObjectInstanceID: -87816
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
