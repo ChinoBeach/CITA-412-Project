@@ -9,6 +9,8 @@ public class AstarAI : MonoBehaviour {
     [SerializeField] float targetResetTimer;
     [SerializeField] float attackDistance;
 
+    private bool isAttacking = false;
+
     int layerMask;
 
     Vector3 moveDir;
@@ -17,6 +19,7 @@ public class AstarAI : MonoBehaviour {
 
     private Seeker seeker;
     private CharacterController controller;
+    private Animator animator;
 
     public Path path;
 
@@ -36,6 +39,8 @@ public class AstarAI : MonoBehaviour {
         // If you are writing a 2D game you can remove this line
         // and use the alternative way to move sugggested further below.
         controller = GetComponent<CharacterController>();
+
+        animator = GetComponent<Animator>();
 
         // Bit shift layer mask to layer 3 to only check for hits on player layer
         layerMask = 1 << 3;
@@ -68,8 +73,7 @@ public class AstarAI : MonoBehaviour {
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, attackDistance, layerMask))
-        {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, attackDistance, layerMask) && !isAttacking) {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             Attack();
         }
@@ -163,6 +167,12 @@ public class AstarAI : MonoBehaviour {
     }
 
     void Attack() {
+        isAttacking = true;
+        animator.SetTrigger("Base_Attack");
         Debug.Log("Attack target");
+    }
+
+    void ResetIsAttacking() {
+        isAttacking = false;
     }
 }
