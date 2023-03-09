@@ -7,6 +7,9 @@ using Pathfinding;
 [HelpURL("http://arongranberg.com/astar/documentation/stable/class_partial1_1_1_astar_a_i.php")]
 public class AstarAI : MonoBehaviour {
     [SerializeField] float targetResetTimer;
+    [SerializeField] float attackDistance;
+
+    Vector3 moveDir;
 
     public Transform targetPosition;
 
@@ -34,7 +37,7 @@ public class AstarAI : MonoBehaviour {
     }
 
     public void OnPathComplete (Path p) {
-        Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
+       // Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
 
         // Path pooling. To avoid unnecessary allocations paths are reference counted.
         // Calling Claim will increase the reference count by 1 and Release will reduce
@@ -57,6 +60,16 @@ public class AstarAI : MonoBehaviour {
         if (!targetPosition) return;
 
         GoToTarget();
+
+        int layerMask = 1 << 6;
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, attackDistance, layerMask))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Attack();
+        }
     }
 
     void OnTriggerStay(Collider collider) {
@@ -141,5 +154,12 @@ public class AstarAI : MonoBehaviour {
         // Move the agent using the CharacterController component
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
         controller.SimpleMove(velocity);
+
+        // Look at target so raycast hits
+        transform.LookAt(targetPosition);
+    }
+
+    void Attack() {
+        Debug.Log("Attack dat bitch");
     }
 }

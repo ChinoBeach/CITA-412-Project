@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
         // slam into the ground
         if (isPlayerGrounded && verticalVelocity < 0)
         {
-            Debug.Log("Landed");
+           // Debug.Log("Landed");
             // hit ground
             verticalVelocity = 0f;
         }
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
         if (jumpAction.triggered)
         {
-            Debug.Log("Jump input");
+           // Debug.Log("Jump input");
             HandleJump();
         }
 
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
         if (groundedTimer > 0)
         {
-            Debug.Log("Jump");
+           // Debug.Log("Jump");
             // When the player jumps on the ground they are no longer grounded, but can still double jump.
             groundedTimer = 0;
             jumpDelayTimer = .3f;
@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
         else if (multiJumpAmount > 0)
         {
-            Debug.Log("Double jump");
+           // Debug.Log("Double jump");
             multiJumpAmount--;
 
             // Physics dynamics formula for calculating jump velocity based on height and gravity.
