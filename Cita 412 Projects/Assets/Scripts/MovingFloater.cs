@@ -70,12 +70,26 @@ public class MovingFloater : MonoBehaviour
     }
     void MoveUpDown()
     {
-
+        if (vect3CurrentPos.y < vect3EndingPos.y)
+        {
+            transform.Translate(Vector3.up * fltXspeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.down * fltXspeed * Time.deltaTime);
+        }
     }
 
     void MoveInOut()
     {
-
+        if (vect3CurrentPos.z < vect3EndingPos.z)
+        {
+            transform.Translate(Vector3.forward * fltXspeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.back * fltXspeed * Time.deltaTime);
+        }
     }
 
 }

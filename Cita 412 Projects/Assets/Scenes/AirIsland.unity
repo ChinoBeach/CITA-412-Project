@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5258437731534690657, guid: e6dec883d139a074cb4d34470539c065, type: 3}
       propertyPath: fltXspeed
-      value: 1
+      value: 3.49
       objectReference: {fileID: 0}
     - target: {fileID: 5258437731534690657, guid: e6dec883d139a074cb4d34470539c065, type: 3}
       propertyPath: fltYspeed
