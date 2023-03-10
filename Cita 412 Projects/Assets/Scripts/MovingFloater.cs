@@ -29,7 +29,7 @@ public class MovingFloater : MonoBehaviour
     //moves the floater left and right
     void MoveLeftRight()
     {
-        if(this.GetComponentInParent<>)
+       
     }
     void MoveUpDown()
     {
