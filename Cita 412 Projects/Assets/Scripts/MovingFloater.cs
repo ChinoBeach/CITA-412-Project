@@ -53,6 +53,20 @@ public class MovingFloater : MonoBehaviour
             MoveInOut();
         }
 
+        //when they reach the destination, turn around
+        if(vect3CurrentPos == vect3EndingPos)
+        {
+            //we are going to switch the starting and ending positions
+            //save the starting position
+            Vector3 tempSave = vect3StartingPos;
+
+            //set the starting postion to the ending position
+            vect3StartingPos = vect3EndingPos;
+
+            //set the ending position to the previous starting positition
+            vect3EndingPos = tempSave;
+
+        }
 
     }
     //Called when the staring pos x is not equal to the ending 
