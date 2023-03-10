@@ -9,8 +9,9 @@ public class MovingFloater : MonoBehaviour
     [SerializeField] float fltYspeed;
     [SerializeField] float fltZspeed;
 
-    //where the object starts and ends at
+    //where the object starts and ends at, as well as the current position. 
     Vector3 vect3StartingPos;
+    Vector3 vect3CurrentPos;
     [SerializeField] Vector3 vect3EndingPos;
 
     
@@ -26,22 +27,28 @@ public class MovingFloater : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //get the starting postion 
+        //get the starting position 
         vect3StartingPos = transform.position;
+        //get the curreny position
+        vect3CurrentPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(vect3StartingPos.x != vect3EndingPos.x)
+        //get the current position 
+        vect3CurrentPos = transform.position;
+
+        //if the x,y,z of the current coordinates and the strating corrdiates are not equal to the ending posisition coordinates, move to match.
+        if (vect3StartingPos.x != vect3EndingPos.x && vect3CurrentPos.x != vect3EndingPos.x)
         {
             MoveLeftRight();
         }
-        if (vect3StartingPos.y != vect3EndingPos.y)
+        if (vect3StartingPos.y != vect3EndingPos.y && vect3CurrentPos.y != vect3EndingPos.y)
         {
             MoveUpDown();
         }
-        if (vect3StartingPos.z != vect3EndingPos.z)
+        if (vect3StartingPos.z != vect3EndingPos.z && vect3CurrentPos.z != vect3EndingPos.z)
         {
             MoveInOut();
         }
@@ -51,7 +58,15 @@ public class MovingFloater : MonoBehaviour
     //Called when the staring pos x is not equal to the ending 
     void MoveLeftRight()
     {
-       
+        if (vect3CurrentPos.x < vect3EndingPos.x)
+        {
+            transform.Translate(Vector3.right * fltXspeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.left * fltXspeed * Time.deltaTime);
+        }
+    
     }
     void MoveUpDown()
     {
