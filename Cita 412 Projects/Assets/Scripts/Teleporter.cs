@@ -5,24 +5,29 @@ using UnityEngine;
 public class Teleporter : MonoBehaviour
 {
     // Async Level Loader Object
-    [SerializeField] LevelLoader levelLoader;
+    [SerializeField] private LevelLoader levelLoader;
 
     // Scene index of the desired island to teleport to
-    [SerializeField] int islandSceneIndex;
+    //[SerializeField] private int islandSceneIndex;
+
+    [SerializeField] private SceneName Scene;
 
     // True when teleporting is initiating. Used to stop multiple calls from happening
-    bool teleporting = false;
+    private bool teleporting = false;
 
-    void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         // If the collided object has the player tag
-        if (other.tag == "Player") {
+        if (other.tag == "Player")
+        {
             // Teleport
             Teleport();
         }
     }
 
     // Function to initiate the LevelLoader
-    void Teleport() {
+    private void Teleport()
+    {
         // Return if teleporting has already been initiated
         if (teleporting) return;
 
@@ -30,6 +35,17 @@ public class Teleporter : MonoBehaviour
         teleporting = true;
 
         // Load selected island with the levelloader
-        levelLoader.LoadScene(islandSceneIndex);
+        levelLoader.LoadScene((int)Scene);
     }
+}
+
+// List of scenes by name for easy refrence.
+public enum SceneName
+{
+    MainMenu = 0,
+    MainIsland = 1,
+    AirIsland = 2,
+    EarthIsland = 3,
+    FireIsland = 4,
+    WaterIsland = 5
 }

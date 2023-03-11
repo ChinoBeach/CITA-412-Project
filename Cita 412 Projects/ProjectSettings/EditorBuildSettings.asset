@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AirIsland.unity
     guid: d3628acf688d27e49b2ea1b9fe5042b0
+  - enabled: 1
+    path: Assets/Scenes/EarthIsland.unity
+    guid: 147f0e246f20049488aa2367980cb052
+  - enabled: 1
+    path: Assets/Scenes/FireIsland.unity
+    guid: 326c8521d1aa5b44a9b4a1885328d5fe
+  - enabled: 1
+    path: Assets/Scenes/WaterIsland.unity
+    guid: eddcaf41f5648114cbdcfdb471c972e1
   m_configObjects: {}

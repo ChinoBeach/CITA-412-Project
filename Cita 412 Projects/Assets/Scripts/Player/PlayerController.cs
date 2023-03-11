@@ -14,11 +14,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+
     // Variables.
     private CharacterController controller;
 
     // Input action vars
     private PlayerInput playerInput;
+
     private InputAction jumpAction;
     private InputAction moveAction;
     private InputAction dashAction;
@@ -28,34 +30,39 @@ public class PlayerController : MonoBehaviour
 
     [Space(10), Header("Speed Variables")]
     [SerializeField, Tooltip("Speed of player on the ground.")] private float groundSpeed = 2.0f;
-    [SerializeField, Tooltip("Speed of player in the air.")] private float airSpeed = 2.0f;
 
+    [SerializeField, Tooltip("Speed of player in the air.")] private float airSpeed = 2.0f;
 
     [Space(10), Header("Jump Variables")]
     [SerializeField, Tooltip("Amount of time before the player can jump again."), Range(0f, 2f)] private float jumpDelay = .2f;
+
     [SerializeField, Tooltip("Height of jump off the ground."), Min(0f)] private float jumpHeight = 2.0f;
     [SerializeField, Tooltip("Amount of jumps in the air off the ground."), Min(0)] private int maxMultiJumps = 1;
     [SerializeField, Tooltip("Height of jumps in midair."), Min(0)] private float multiJumpHeight = 1.0f;
     [SerializeField, Tooltip("How fast the player is pulled down.")] private float gravity = -9.81f;
+
     // The current jumps you have.
     private int multiJumpAmount;
+
     // The current timer counting down before the player can jump.
     private float jumpDelayTimer = 0f;
+
     // ground timer so the player can go down slopes and stairs without being off the ground.
     private float groundedTimer = 0f;
 
-
     [Space(10), Header("Dash Variables")]
     [SerializeField] private float dashSpeed;
+
     [SerializeField] private Vector3 dashDir;
     [SerializeField] private Vector3 dashVelocity;
     [SerializeField] private bool hasDash = true;
     [SerializeField] private bool isDashing = false;
-    #endregion
+
+    #endregion Variables
 
     #region Unity Methods
 
-    void Start()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
@@ -67,24 +74,23 @@ public class PlayerController : MonoBehaviour
         multiJumpAmount = maxMultiJumps;
     }
 
-    void Update()
+    private void Update()
     {
         if (dashAction.triggered && hasDash && Upgrade.Instance.ownDash)
         {
-
         }
 
         if (isDashing)
         {
-
         }
         // Apply movement.
         controller.Move(CalculateMovement() * Time.deltaTime);
     }
 
-    #endregion
+    #endregion Unity Methods
 
     #region Private Methods
+
     // Private Methods.
 
     // TODO: Check if the input is within a radius behind the player (eg. 170 - 190), if its in this range. do a turn around anim.
@@ -96,7 +102,6 @@ public class PlayerController : MonoBehaviour
 
         // TODO: make this find if player is grounded with a raycast to check the slope of the floor by normal.
         bool isPlayerGrounded = controller.isGrounded;
-
 
         // If the player is in the air, use a different air speed, and give a bit of velocity so you dont just stop midair
         if (isPlayerGrounded)
@@ -125,7 +130,6 @@ public class PlayerController : MonoBehaviour
         // Get directional input.
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
         move *= groundSpeed;
-
 
         // Make movement relative to the camera.
         var cam = Camera.main;
@@ -162,7 +166,6 @@ public class PlayerController : MonoBehaviour
             HandleJump();
         }
 
-
         // Append velocity to move.
         move.y = verticalVelocity;
 
@@ -180,7 +183,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        if(jumpDelayTimer > 0)
+        if (jumpDelayTimer > 0)
         {
             return;
         }
@@ -194,7 +197,6 @@ public class PlayerController : MonoBehaviour
             // Physics dynamics formula for calculating jump velocity based on height and gravity.
             verticalVelocity = Mathf.Sqrt(jumpHeight * -3 * gravity);
         }
-
         else if (multiJumpAmount > 0)
         {
             Debug.Log("Double jump");
@@ -212,17 +214,18 @@ public class PlayerController : MonoBehaviour
 
     private void HandleWalljump()
     {
-
     }
 
     /*private void HandleTurnaround()
     {
         if (Vector3.Dot(prevDir.normalized, move.normalized))
     }*/
-    #endregion
+
+    #endregion Private Methods
 
     #region Public Methods
+
     // Public Methods.
 
-    #endregion
+    #endregion Public Methods
 }
