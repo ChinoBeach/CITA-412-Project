@@ -134,8 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundSpeed: 13
-  slidingSpeed: 1
-  groundDetectionLength: 100
+  slidingSpeed: -10.4
+  slideSlopeLimit: 65
+  maxSlopeLimit: 80
   jumpDelay: 0.2
   airSpeed: 9
   jumpHeight: 3
@@ -147,7 +148,8 @@ MonoBehaviour:
   dashVelocity: {x: 0, y: 0, z: 0}
   hasDash: 1
   isDashing: 0
-  isTouchingWall: 0
+  jumpForce: 5
+  angleTolerance: 5
 --- !u!114 &414698259486099617
 MonoBehaviour:
   m_ObjectHideFlags: 0

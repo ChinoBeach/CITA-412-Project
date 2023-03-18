@@ -201,11 +201,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &773707770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2729623321306919193, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-  m_PrefabInstance: {fileID: 2729623321675782770}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949609381
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,18 +326,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2729623321306919197, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
   m_PrefabInstance: {fileID: 2729623321675782770}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1716127032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773707770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79366320059196144afd0af92adbb7a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1581069374244272280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -416,20 +399,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2729623321306919170, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-      propertyPath: gravity
-      value: -20
+      propertyPath: slidingSpeed
+      value: -10.4
       objectReference: {fileID: 0}
     - target: {fileID: 2729623321306919170, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-      propertyPath: airSpeed
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2729623321306919170, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-      propertyPath: jumpDelay
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2729623321306919170, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-      propertyPath: groundSpeed
-      value: 13
+      propertyPath: slideSlopeLimit
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2729623321306919193, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
       propertyPath: m_Name
