@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2729623321306919170}
   - component: {fileID: 414698259486099617}
   - component: {fileID: 3903659893203802295}
+  - component: {fileID: 1716127032}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -132,9 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af3db96130675f4999b0e8ea57f0830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundSpeed: 10
-  airSpeed: 7
+  groundSpeed: 13
+  slidingSpeed: 1
+  groundDetectionLength: 100
   jumpDelay: 0.2
+  airSpeed: 9
   jumpHeight: 3
   maxMultiJumps: 1
   multiJumpHeight: 2
@@ -144,6 +147,7 @@ MonoBehaviour:
   dashVelocity: {x: 0, y: 0, z: 0}
   hasDash: 1
   isDashing: 0
+  isTouchingWall: 0
 --- !u!114 &414698259486099617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +191,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownDash: 0
+--- !u!114 &1716127032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729623321306919193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79366320059196144afd0af92adbb7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

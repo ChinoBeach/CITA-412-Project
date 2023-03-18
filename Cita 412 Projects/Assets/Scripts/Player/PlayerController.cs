@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool isSliding = false;
     // The hit data of the slope the controller is standing on.
     [SerializeField, Tooltip("Speed of player sliding down a slope.")] private float groundDetectionLength = 100f;
+    [SerializeField, Tooltip("Speed of player sliding down a slope.")] private float slideSlopeLimit = 60f;
 
 
     [Space(10), Header("Air Variables")]
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         // Apply gravity then check if grounded.
         ApplyGravity();
-        HandleGrounded();
+        CheckIfGrounded();
 
         // First check if player is sliding
         // If sliding, make them start going down the hill at a sliding speed
@@ -110,25 +111,22 @@ public class PlayerController : MonoBehaviour
         {
         }
 
-        move = CalculateMovement(moveInput);
-        MoveRelativeToCam();
 
+
+        move = CalculateMovement(moveInput);
 
         // Reduce the delay timer every frame
         if (jumpDelayTimer > 0)
         {
             jumpDelayTimer -= Time.deltaTime;
-            return;
         }
 
         if (jumpAction.triggered)
         {
-            //Debug.LogWarning("JumpInput");
             HandleJump();
-            //Debug.Log(verticalVelocity);
-            //Debug.Break();
         }
 
+        MoveRelativeToCam();
         // Doing the relative cam movement calulation sets y to 0, apply vertical velocity here.
         move.y = verticalVelocity;
         
@@ -186,15 +184,21 @@ public class PlayerController : MonoBehaviour
         dashVelocity = dashDir * dashSpeed * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Handles checking if you can and executing jumps.
+    /// </summary>
     private void HandleJump()
     {
         // TODO: Make it so the longer you press space the higher you go to a certain max.
-        Debug.Log("Handling jump");
-        Debug.Log(verticalVelocity);
+
+        if (jumpDelayTimer > 0)
+        {
+            // Can't jump yet.
+            return;
+        }
 
         if (groundedTimer > 0)
         {
-            Debug.Log("Jump");
             // When the player jumps on the ground they are no longer grounded, but can still double jump.
             groundedTimer = 0;
             jumpDelayTimer = jumpDelay;
@@ -203,15 +207,13 @@ public class PlayerController : MonoBehaviour
         }
         else if (multiJumpAmount > 0)
         {
-            Debug.Log("Double jump");
-
             multiJumpAmount--;
             jumpDelayTimer = jumpDelay;
             // Physics dynamics formula for calculating jump velocity based on height and gravity.
             verticalVelocity = Mathf.Sqrt(multiJumpHeight * -3 * gravity);
         }
+
         // Player isnt on the ground and is out of double jumps
-        Debug.Log(verticalVelocity);
     }
 
     private IEnumerator DashCoroutine()
@@ -221,6 +223,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleWalljump()
     {
+        throw new System.NotImplementedException();
     }
 
     /*private void HandleTurnaround()
@@ -228,12 +231,14 @@ public class PlayerController : MonoBehaviour
         if (Vector3.Dot(prevDir.normalized, move.normalized))
     }*/
 
-    private void HandleGrounded()
+    /// <summary>
+    /// Handles checking if the player is grounded, as well as handling a few things around touching the ground.
+    /// </summary>
+    private void CheckIfGrounded()
     {
         isPlayerGrounded = controller.isGrounded;
 
-        // If the player is in the air, use a different air speed, and give a bit of velocity so you dont just stop midair
-        if (isPlayerGrounded && !isSliding)
+        if (isPlayerGrounded) //&& !isSliding)
         {
             // cooldown interval to allow reliable jumping even whem coming down ramps
             groundedTimer = 0.2f;
@@ -248,34 +253,33 @@ public class PlayerController : MonoBehaviour
         // slam into the ground
         if (isPlayerGrounded && verticalVelocity < 0)
         {
-            //Debug.Log("Landed");
-            // hit ground
             verticalVelocity = 0f;
         }
     }
 
-    private void CheckSliding()
+    /// <summary>
+    /// Handles processes with detecting if the player should be sliding down a slope.
+    /// </summary>
+    private void CheckIfSliding()
     {
-        //var rayDistance = 100f;
-
-        //if (Physics.Raycast(transform.position, -Vector3.up, out groundData, rayDistance))
-        //{
-        //    // Use ControllerColliderHit to get exact point where we are touching the ground
-        //    //bool sliding |= (Vector3.Angle(hit.normal, Vector3.up) > controller.slideLimit && CanSlide() && hit.collider.tag != “NoSlide”);
-        //    // TODO: Add ability to make the player slide regardless if a surface has a tag akin to "Slippery".
-        //    if (angle >= controller.slopeLimit)
-        //    {
-        //        // TODO: set move equal to this so they slide down it
-        //        isSliding = true;
-        //        // TODO: make this only true if slippery slope.
-        //        // Player is considered ungrounded if the slope is considered slippery
-        //        groundedTimer = 0;
-        //        multiJumpAmount = 0;
-        //        return;
-        //    }
-        //}
-
-        isSliding = false;
+        if (groundData.collider == null)
+        {
+            isSliding = false;
+            return;
+        }
+        // Check if the surface is too steep to stand on and that its tag says the slope wont make the character slip
+        // or if the tag says the surface is slippery, always slip.
+        isSliding = (Vector3.Angle(groundData.normal, Vector3.up) > slideSlopeLimit
+            && !groundData.collider.CompareTag("NonSlippery"))
+            || groundData.collider.CompareTag("Slippery");
+        
+        // If the ground is very slippery, remove the ability to jump as well so the player continues sliding
+        if (groundData.collider.CompareTag("VerySlippery"))
+        {
+            // Removing jumps and double jumps;
+            multiJumpAmount = 0;
+            groundedTimer = 0;
+        }
     }
 
     private Vector3 CalculateSlidingMovement()
@@ -284,9 +288,11 @@ public class PlayerController : MonoBehaviour
         return Vector3.ProjectOnPlane(new Vector3(0, slidingSpeed, 0), groundData.normal);
     }
 
+    /// <summary>
+    /// Make movement relative to the camera by getting the cameras forward and right.
+    /// </summary>
     private void MoveRelativeToCam()
     {
-        // Make movement relative to the camera.
         var cam = Camera.main;
 
         var forward = cam.transform.forward;
@@ -301,8 +307,13 @@ public class PlayerController : MonoBehaviour
         move = forward * move.z + right * move.x;
     }
 
+    /// <summary>
+    /// Applies gravity. Simple as that.
+    /// </summary>
     private void ApplyGravity()
     {
+        // For some reason, this will pull far too hard unless multiplied by Time.deltaTime.
+        // However, changing gravity itself messes with the jump function as it refrences gravity for its calculation.
         verticalVelocity += gravity * Time.deltaTime;
     }
 
