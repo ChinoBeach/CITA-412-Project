@@ -324,6 +324,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void CheckIfGrounded()
     {
+        // BUG: Player doesnt walk down slopes propperly
+        // possible solution, do a projection on plane to make sure they stay on the slope.
         isPlayerGrounded = controller.isGrounded;
 
         if (isPlayerGrounded) //&& !isSliding)
@@ -418,6 +420,12 @@ public class PlayerController : MonoBehaviour
                 turnSpeed * Time.deltaTime
                 );
         }
+    }
+
+    private void CheckIfTouchingWall()
+    {
+        // shoot a ray going transform.forward
+        // Do a wall slide if you are touching a wall but also grounded.
     }
 
     #endregion Private Methods

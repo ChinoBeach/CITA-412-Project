@@ -139,8 +139,9 @@ MonoBehaviour:
   slidingSpeed: 11
   slideSlopeLimit: 60
   maxSlopeLimit: 80
+  airSpeed: 13
+  airSprintSpeed: 20
   jumpDelay: 0.2
-  airSpeed: 9
   jumpHeight: 3
   maxMultiJumps: 1
   multiJumpHeight: 2
