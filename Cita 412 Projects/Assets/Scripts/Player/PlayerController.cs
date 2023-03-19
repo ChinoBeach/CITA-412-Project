@@ -32,12 +32,13 @@ public class PlayerController : MonoBehaviour
     private Vector3 move;
 
     [Space(10), Header("Ground Variables")]
-    [SerializeField, Tooltip("Speed of player on the ground.")] private float groundSpeed = 2f;
-    [SerializeField, Tooltip("Speed of player on the ground.")] private float sprintSpeed = 2f;
+    [SerializeField, Tooltip("Speed of player on the ground.")] private float groundSpeed = 15f;
+    [SerializeField, Tooltip("Speed of player on the ground.")] private float sprintSpeed = 25f;
     [SerializeField, Tooltip("Speed of player turning to face the movement angle.")] private float turnSpeed = 2f;
     // The hit data of the ground the controller is standing on.
     private ControllerColliderHit groundData = null;
     private bool isPlayerGrounded = true;
+    private bool isSprinting = false;
 
     [Space(10), Header("Sliding Variables")]
     [SerializeField, Tooltip("Speed of player sliding down a slope."), Min(0f)] private float slidingSpeed = 10f;
@@ -47,8 +48,9 @@ public class PlayerController : MonoBehaviour
 
 
     [Space(10), Header("Air Variables")]
+    [SerializeField, Tooltip("Speed of player in the air.")] private float airSpeed = 13f;
+    [SerializeField, Tooltip("Speed of player in the air.")] private float airSprintSpeed = 20f;
     [SerializeField, Tooltip("Amount of time before the player can jump again."), Range(0f, 2f)] private float jumpDelay = .2f;
-    [SerializeField, Tooltip("Speed of player in the air.")] private float airSpeed = 2f;
     [SerializeField, Tooltip("Height of jump off the ground."), Min(0f)] private float jumpHeight = 2.0f;
     [SerializeField, Tooltip("Amount of jumps in the air off the ground."), Min(0)] private int maxMultiJumps = 1;
     [SerializeField, Tooltip("Height of jumps in midair."), Min(0)] private float multiJumpHeight = 1.0f;
@@ -209,7 +211,7 @@ public class PlayerController : MonoBehaviour
         // Get directional input.
         move = new Vector3(moveInput.x, 0, moveInput.y);
 
-        if (sprintAction.triggered)
+        if (sprintAction.IsPressed())
         {
             move *= sprintSpeed;
         }
@@ -230,10 +232,17 @@ public class PlayerController : MonoBehaviour
     {
         // Get directional input.
         move = new Vector3(moveInput.x, 0, moveInput.y);
-        move *= airSpeed;
 
-        // Multiply by one if not sprinting or by sprint speed if sprinting
-        return move * (sprintAction.triggered ? sprintSpeed : 1);
+        if (sprintAction.IsPressed())
+        {
+            move *= airSprintSpeed;
+        }
+        else
+        {
+            move *= airSpeed;
+        }
+
+        return move;
     }
 
     /// <summary>
