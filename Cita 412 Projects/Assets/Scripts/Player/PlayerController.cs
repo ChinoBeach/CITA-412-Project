@@ -13,8 +13,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+    // TODO: it would likely be more effecient to have a state machine / enum for to find what state we are in since we have multiple states the player can be in.
 
     // Variables.
+    public static PlayerController Instance { get; private set; }
     private CharacterController controller;
 
     // Input action vars.
@@ -22,18 +24,20 @@ public class PlayerController : MonoBehaviour
     private InputAction jumpAction;
     private InputAction moveAction;
     private InputAction dashAction;
+    private InputAction sprintAction;
 
     // Movement Vars
     private float verticalVelocity;
     private Vector3 prevDir;
     private Vector3 move;
-    private bool isPlayerGrounded;
 
     [Space(10), Header("Ground Variables")]
     [SerializeField, Tooltip("Speed of player on the ground.")] private float groundSpeed = 2f;
+    [SerializeField, Tooltip("Speed of player on the ground.")] private float sprintSpeed = 2f;
+    [SerializeField, Tooltip("Speed of player turning to face the movement angle.")] private float turnSpeed = 2f;
     // The hit data of the ground the controller is standing on.
     private ControllerColliderHit groundData = null;
-
+    private bool isPlayerGrounded = true;
 
     [Space(10), Header("Sliding Variables")]
     [SerializeField, Tooltip("Speed of player sliding down a slope."), Min(0f)] private float slidingSpeed = 10f;
@@ -56,6 +60,8 @@ public class PlayerController : MonoBehaviour
     // ground timer so the player can go down slopes and stairs without being off the ground.
     private float groundedTimer = 0f;
 
+    [Space(10), Header("Bellow Is Currently Unused")]
+
     [Space(10), Header("Dash Variables")]
     [SerializeField] private float dashSpeed;
     [SerializeField] private Vector3 dashDir;
@@ -73,6 +79,20 @@ public class PlayerController : MonoBehaviour
     #endregion Variables
 
     #region Unity Methods
+    private void Awake()
+    {
+        // Singleton moment.
+
+        if (Instance != null && Instance != this)
+        {
+            // That ain't Drake.
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -82,6 +102,8 @@ public class PlayerController : MonoBehaviour
         jumpAction = playerInput.actions["Jump"];
         moveAction = playerInput.actions["Move"];
         dashAction = playerInput.actions["Dash"];
+        sprintAction = playerInput.actions["Sprint"];
+        
 
         multiJumpAmount = maxMultiJumps;
         groundData = new ControllerColliderHit();
@@ -112,6 +134,29 @@ public class PlayerController : MonoBehaviour
         {
         }
 
+        CheckIfSliding();
+
+        // TODO: implement a way to make characters move slower depending on a slope till a point where they will slide down it
+        // TODO: instead of an if statement, these could probably simply be added together in order to get a mix of the two vectors, just make sure the slope speed takes presidence
+        // Or make it so a steeper slope will "Fight back" harder to a player trying to walk up it.
+        if (isSliding)
+        {
+            move = CalculateSlidingMovement();
+            FaceTowardMovementAngle();
+        }
+        else if (groundedTimer > 0)
+        {
+            move = CalculateGroundMovement(moveInput);
+            MoveRelativeToCam();
+            FaceTowardMovementAngle();
+        }
+        else
+        {
+            move = CalculateAirMovement(moveInput);
+            MoveRelativeToCam();
+            FaceTowardMovementAngle();
+        }
+
         // Reduce the delay timer every frame
         if (jumpDelayTimer > 0)
         {
@@ -123,30 +168,24 @@ public class PlayerController : MonoBehaviour
             HandleJump();
         }
 
-        CheckIfSliding();
-
-        // TODO: implement a way to make characters move slower depending on a slope till a point where they will slide down it
-        if (isSliding)
-        {
-            move = CalculateSlidingMovement();
-        }
-        else
-        {
-            move = CalculateGroundMovement(moveInput);
-            MoveRelativeToCam();
-            // Doing the relative cam movement calulation sets y to 0, apply vertical velocity here.
-            move.y = verticalVelocity;
-        }
+        // Add the veritcal velocity at the end.
+        // Adding to the velocity since it gets reset to zero the beginning of the next frame.
+        // Also needs to be added or sliding doesnt function propperly
+        move.y += verticalVelocity;
 
         // Apply movement.
-        Debug.DrawLine(transform.position, transform.position + move);
         controller.Move(move * Time.deltaTime);
     }
-
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         groundData = hit;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + move / 5);
     }
 
     #endregion Unity Methods
@@ -160,36 +199,52 @@ public class PlayerController : MonoBehaviour
 
     // TODO: make this into a calculate x and z and calculate Y so that sliding can skip lateral movement so you can just go down the slope.
     // Slope movement could be able to be nudged left and right.
+    /// <summary>
+    /// Calculates the players movement while walking on the ground.
+    /// </summary>
+    /// <param name="moveInput">The player input this frame.</param>
+    /// <returns></returns>
     private Vector3 CalculateGroundMovement(Vector2 moveInput)
     {
         // Get directional input.
         move = new Vector3(moveInput.x, 0, moveInput.y);
 
-        if (isPlayerGrounded)
+        if (sprintAction.triggered)
         {
-            move *= groundSpeed;
+            move *= sprintSpeed;
         }
         else
         {
-            move *= airSpeed;
-        }
-
-        // Face the direction we are pointing.
-        // TODO: Make a smooth turn algorithem to this so it doesnt just snap directions.
-        if (move.magnitude > 0.05f)
-        {
-            transform.forward = move;
+            move *= groundSpeed;
         }
 
         return move;
     }
 
+    /// <summary>
+    /// Calculates the players movement while moving in the air.
+    /// </summary>
+    /// <param name="moveInput">The player input this frame.</param>
+    /// <returns></returns>
+    private Vector3 CalculateAirMovement(Vector2 moveInput)
+    {
+        // Get directional input.
+        move = new Vector3(moveInput.x, 0, moveInput.y);
+        move *= airSpeed;
+
+        // Multiply by one if not sprinting or by sprint speed if sprinting
+        return move * (sprintAction.triggered ? sprintSpeed : 1);
+    }
+
+    /// <summary>
+    /// Calculates the movement of a player sliding in a frame.
+    /// </summary>
+    /// <returns></returns>
     private Vector3 CalculateSlidingMovement()
     {
         // TODO: also add something like the grounded timer for jumping so the player will slide down slopes with even small sections of non steep slope so the player cant glitch out the detection.
         Debug.Log($"Slope: {groundData.normal}");
         Vector3 slideVelocity = Vector3.ProjectOnPlane(new Vector3(0, -slidingSpeed, 0), groundData.normal);
-        slideVelocity.y += verticalVelocity;
         return slideVelocity;
     }
 
@@ -210,7 +265,7 @@ public class PlayerController : MonoBehaviour
         // TODO: Make it so the longer you press space the higher you go to a certain max.
 
         // When the player jumps, the slope no longer affects them.
-        // The easiest way i found to do this is to remove hit from ground data so the slide checker retruns false.
+        // The easiest way I found to do this is to remove hit from ground data so the slide checker retruns false.
         groundData = new ControllerColliderHit();
 
         if (jumpDelayTimer > 0)
@@ -256,7 +311,7 @@ public class PlayerController : MonoBehaviour
     }*/
 
     /// <summary>
-    /// Handles checking if the player is grounded, as well as handling a few things around touching the ground.
+    /// Checks if the player is grounded, as well as handling a few things around touching the ground.
     /// </summary>
     private void CheckIfGrounded()
     {
@@ -311,7 +366,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     /// <summary>
-    /// Make movement relative to the camera by getting the cameras forward and right.
+    /// Make movement relative to the camera by getting the cameras forward and right transform.
     /// </summary>
     private void MoveRelativeToCam()
     {
@@ -337,6 +392,23 @@ public class PlayerController : MonoBehaviour
         // For some reason, this will pull far too hard unless multiplied by Time.deltaTime.
         // However, changing gravity itself messes with the jump function as it refrences gravity for its calculation.
         verticalVelocity += gravity * Time.deltaTime;
+    }
+
+    /// <summary>
+    /// Helper function to make the character face the direction we are moving in.
+    /// </summary>
+    private void FaceTowardMovementAngle()
+    {
+        // TODO: Make a smooth turn algorithem to this so it doesnt just snap directions.
+        if (move.magnitude > Mathf.Epsilon)
+        {
+            transform.rotation = Quaternion.Slerp
+                (
+                transform.rotation,
+                Quaternion.LookRotation(new Vector3(move.x, 0, move.z)),
+                turnSpeed * Time.deltaTime
+                );
+        }
     }
 
     #endregion Private Methods

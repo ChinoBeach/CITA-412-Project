@@ -134,8 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundSpeed: 13
-  slidingSpeed: -10.4
-  slideSlopeLimit: 65
+  sprintSpeed: 20
+  turnSpeed: 20
+  slidingSpeed: 11
+  slideSlopeLimit: 60
   maxSlopeLimit: 80
   jumpDelay: 0.2
   airSpeed: 9
