@@ -29,11 +29,33 @@ public class MovingFloater : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-      
+        //variable for the percentage of the path that has been completed
+        float percentPathCompletion;
+
+        /*-------------------------------------------------------------------------------*/
+
+        //increment time passed
+        timePassed += Time.deltaTime;
+        //calculate how much of the path from one waypoint to the next is completed
+        percentPathCompletion = timePassed / timeToNextPos;
+        //smooth out the movement closer to the starting and ending points (slows down at the start and end)
+        percentPathCompletion = Mathf.SmoothStep(0, 1, percentPathCompletion);
+
+        //move the platform to the next point(smoothly)
+        transform.position = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
+        //rotate the platform to match the points better
+        transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
+        //check if the floater has made it to the position(the path between has been completed)
+        if (percentPathCompletion >= 1)
+        {
+            //get the next waypoint on the path
+            SelectNextWayPoint();
+        }
+
 
     }//end of (fixed)update method
 
-    // SelectNextWayPoint is called in start to initalize the path
+    // SelectNextWayPoint is called in start to initalize the path, and also in update whenever the floater reaches a waypoint.
     void SelectNextWayPoint()
     {
         //variable for the distance between waypoints
