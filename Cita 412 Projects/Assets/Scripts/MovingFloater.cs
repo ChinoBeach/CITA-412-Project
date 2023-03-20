@@ -8,6 +8,7 @@ public class MovingFloater : MonoBehaviour
     [SerializeField] float fltXspeed;
     [SerializeField] float fltYspeed;
     [SerializeField] float fltZspeed;
+    
 
     //where the object starts and ends at, as well as the current position. 
     Vector3 vect3StartingPos;
@@ -15,14 +16,7 @@ public class MovingFloater : MonoBehaviour
     [SerializeField] Vector3 vect3EndingPos;
 
     
-    /* Might come back to this. Was considering using it for turn around points.
-    [SerializeField] float fltMaxX;
-    [SerializeField] float fltMinX;
-    [SerializeField] float fltMaxY;
-    [SerializeField] float fltMinY;
-    [SerializeField] float fltMaxZ;
-    [SerializeField] float fltMinZ;
-    */
+ 
 
     // Start is called before the first frame update
     void Start()
