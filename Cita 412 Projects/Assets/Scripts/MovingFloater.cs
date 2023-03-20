@@ -15,7 +15,8 @@ public class MovingFloater : MonoBehaviour
     Vector3 vect3CurrentPos;
     [SerializeField] Vector3 vect3EndingPos;
 
-    
+    //how much of a variation is allowed in positions
+    float acceptedDifference = 0.2f; // this doesnt really work yet and idk what to make this number
  
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class MovingFloater : MonoBehaviour
     {
         //get the starting position 
         vect3StartingPos = transform.position;
-        //get the curreny position
+        //get the current position
         vect3CurrentPos = transform.position;
     }
 
@@ -48,6 +49,7 @@ public class MovingFloater : MonoBehaviour
         }
 
         //when they reach the destination, turn around
+        //if(ApporximateEqualVectror3(vect3CurrentPos, vect3EndingPos)) ***this is currently buggy and doesnt work
         if(vect3CurrentPos == vect3EndingPos)
         {
             //we are going to switch the starting and ending positions
@@ -63,7 +65,7 @@ public class MovingFloater : MonoBehaviour
         }
 
     }
-    //Called when the staring pos x is not equal to the ending 
+    //Called when the staring pos x, and the current pos x are not equal to the ending pos x
     void MoveLeftRight()
     {
         if (vect3CurrentPos.x < vect3EndingPos.x)
@@ -76,6 +78,8 @@ public class MovingFloater : MonoBehaviour
         }
     
     }
+
+    //Called when the staring pos y, and the current pos y are not equal to the ending pos y
     void MoveUpDown()
     {
         if (vect3CurrentPos.y < vect3EndingPos.y)
@@ -88,6 +92,7 @@ public class MovingFloater : MonoBehaviour
         }
     }
 
+    //Called when the staring pos Z, and the current pos z are not equal to the ending pos z
     void MoveInOut()
     {
         if (vect3CurrentPos.z < vect3EndingPos.z)
@@ -98,6 +103,28 @@ public class MovingFloater : MonoBehaviour
         {
             transform.Translate(Vector3.back * fltXspeed * Time.deltaTime);
         }
+    }
+
+    //Called when comparing two vector3s
+    
+    //***Currently Buggy dont use yet. ***
+    public bool ApporximateEqualVectror3 (Vector3 vectCompare1, Vector3 vectCompare2 )
+    {
+        //get the differnce between the two vectors
+        var difX = vectCompare1.x - vectCompare2.x;
+        var dify = vectCompare1.y - vectCompare2.y;
+        var difz = vectCompare1.z - vectCompare2.z;
+        
+        //check to see if the differnce is greater than that accepted
+        if(difX > acceptedDifference || dify > acceptedDifference || difz > acceptedDifference)
+        {
+            //exit the method with false
+            return false;
+        }
+        
+        //else it must be an acceptable distance variaton so exit the method as true.
+        return true;
+        
     }
 
 }
