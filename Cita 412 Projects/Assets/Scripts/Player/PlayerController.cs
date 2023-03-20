@@ -344,6 +344,7 @@ public class PlayerController : MonoBehaviour
         // slam into the ground
         if (isPlayerGrounded && verticalVelocity < 0)
         {
+            // hit ground
             verticalVelocity = 0f;
         }
     }
@@ -394,6 +395,8 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         move = forward * move.z + right * move.x;
+
+        return move;
     }
 
     /// <summary>
