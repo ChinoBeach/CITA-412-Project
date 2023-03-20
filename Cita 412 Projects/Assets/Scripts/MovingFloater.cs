@@ -15,9 +15,12 @@ public class MovingFloater : MonoBehaviour
     Vector3 vect3CurrentPos;
     [SerializeField] Vector3 vect3EndingPos;
 
-    //how much of a variation is allowed in positions
-    float acceptedDifference = 0.2f; // this doesnt really work yet and idk what to make this number
- 
+    //the starting and ending points can be done as waypoints instead but for now this works.
+
+
+    //how much of a variation is allowed in positions 
+    //***this doesnt really work yet and idk what to make this number
+    float acceptedDifference = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -125,6 +128,20 @@ public class MovingFloater : MonoBehaviour
         //else it must be an acceptable distance variaton so exit the method as true.
         return true;
         
+    }
+
+    //This method is called when the player steps onto the platform
+    private void OnTriggerEnter(Collider other)
+    {
+        //parent the transform component
+        other.transform.SetParent(transform);
+    }
+    
+    //This method is called when the player steps off of the platform
+    private void OnTriggerExit(Collider other)
+    {
+        //set the parent of the transform component back to empty(null)
+        other.transform.SetParent(null);
     }
 
 }

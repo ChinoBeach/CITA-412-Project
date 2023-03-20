@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4658481617499530009}
   - component: {fileID: 4658481617499530008}
   - component: {fileID: 5258437731534690657}
+  - component: {fileID: 7565825571259675644}
   m_Layer: 0
   m_Name: MovingFloater
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4658481617499530010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.2, y: 107.21, z: 168.1}
+  m_LocalPosition: {x: -56.2, y: 106.3, z: 168.1}
   m_LocalScale: {x: 8, y: 5, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,11 +94,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4658481617499530010}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.1309845, z: 1}
+  m_Center: {x: 0, y: 0.06549225, z: 0}
 --- !u!114 &5258437731534690657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d306965057e374b919ad8ffd193e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fltXspeed: 0
+  fltYspeed: 0
+  fltZspeed: 0
+  vect3EndingPos: {x: 0, y: 0, z: 0}
+--- !u!64 &7565825571259675644
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658481617499530010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
