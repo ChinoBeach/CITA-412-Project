@@ -79,6 +79,21 @@ public class MovingFloater : MonoBehaviour
         timeToNextPos = distBtwnPnts / fltSpeed;
 
     }//end of SelectNextWayPoint method
-    
+
+    // OnTriggerEnter is called when the player steps onto the platform
+    private void OnTriggerEnter(Collider other)
+    {
+        //parent the transform component
+        other.transform.SetParent(transform);
+    }//end of OnTriggerEnter method
+
+    // OnTriggerExit is called when the player steps off of the platform
+    private void OnTriggerExit(Collider other)
+    {
+        //set the parent of the transform component back to empty(null)
+        other.transform.SetParent(null);
+    }//end of OnTriggerExitMethod
+
+
 
 }//end of Moving Floater class
