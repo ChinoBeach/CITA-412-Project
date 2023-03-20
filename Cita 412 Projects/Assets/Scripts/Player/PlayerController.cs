@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
 
         multiJumpAmount = maxMultiJumps;
         groundData = new ControllerColliderHit();
+        slideSlopeLimit = controller.slopeLimit;
     }
 
     private void Update()
