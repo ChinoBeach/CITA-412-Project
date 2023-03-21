@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckIfSliding();
+        //CheckIfTouchingWall();
 
         // TODO: implement a way to make characters move slower depending on a slope till a point where they will slide down it
         // TODO: instead of an if statement, these could probably simply be added together in order to get a mix of the two vectors, just make sure the slope speed takes presidence
@@ -145,14 +146,17 @@ public class PlayerController : MonoBehaviour
         if (isSliding)
         {
             move = CalculateSlidingMovement();
+            //MoveRelativeToCam();
             FaceTowardMovementAngle();
         }
+
         else if (groundedTimer > 0)
         {
             move = CalculateGroundMovement(moveInput);
             MoveRelativeToCam();
             FaceTowardMovementAngle();
         }
+
         else
         {
             move = CalculateAirMovement(moveInput);
@@ -175,6 +179,7 @@ public class PlayerController : MonoBehaviour
         // Adding to the velocity since it gets reset to zero the beginning of the next frame.
         // Also needs to be added or sliding doesnt function propperly
         move.y += verticalVelocity;
+
 
         // Apply movement.
         controller.Move(move * Time.deltaTime);
@@ -253,9 +258,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 CalculateSlidingMovement()
     {
         // TODO: also add something like the grounded timer for jumping so the player will slide down slopes with even small sections of non steep slope so the player cant glitch out the detection.
-        Debug.Log($"Slope: {groundData.normal}");
         Vector3 slideVelocity = Vector3.ProjectOnPlane(new Vector3(0, -slidingSpeed, 0), groundData.normal);
-        return slideVelocity;
+        Debug.Log($"Slope Velocity: {slideVelocity}");
+        return slideVelocity; // * new Vector3(moveInput.x, slidingSpeed, moveInput.y);
     }
 
     // TODO: maybe make this a coroutine;
@@ -395,8 +400,6 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
 
         move = forward * move.z + right * move.x;
-
-        return move;
     }
 
     /// <summary>
@@ -430,6 +433,25 @@ public class PlayerController : MonoBehaviour
     {
         // shoot a ray going transform.forward
         // Do a wall slide if you are touching a wall but also grounded.
+        if (groundData.collider == null)
+        {
+            isTouchingWall = false;
+            return;
+        }
+
+        float angle = Vector3.Angle(groundData.normal, Vector3.up);
+
+        if (angle >= 90 - angleTolerance && angle <= 90 + angleTolerance)
+        {
+            Debug.Log("Touching wall");
+            isSliding = false;
+            isTouchingWall = true;
+            isPlayerGrounded = false;
+            groundedTimer = 0;
+            return;
+        }
+
+        isTouchingWall = true;
     }
 
     #endregion Private Methods

@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 2729623321306919199}
   - component: {fileID: 2729623321306919198}
   - component: {fileID: 2729623321306919171}
-  - component: {fileID: 2729623321306919170}
   - component: {fileID: 414698259486099617}
-  - component: {fileID: 3903659893203802295}
+  - component: {fileID: 1232506634482594543}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -34,7 +33,8 @@ Transform:
   m_LocalPosition: {x: -0.24955916, y: 1.25, z: -2.7101526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1005800582439167231}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,38 +120,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2729623321306919170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729623321306919193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af3db96130675f4999b0e8ea57f0830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundSpeed: 13
-  sprintSpeed: 20
-  turnSpeed: 20
-  slidingSpeed: 11
-  slideSlopeLimit: 60
-  maxSlopeLimit: 80
-  airSpeed: 13
-  airSprintSpeed: 20
-  jumpDelay: 0.2
-  jumpHeight: 3
-  maxMultiJumps: 1
-  multiJumpHeight: 2
-  gravity: -20
-  dashSpeed: 0
-  dashDir: {x: 0, y: 0, z: 0}
-  dashVelocity: {x: 0, y: 0, z: 0}
-  hasDash: 1
-  isDashing: 0
-  jumpForce: 5
-  angleTolerance: 5
 --- !u!114 &414698259486099617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +150,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3903659893203802295
+--- !u!114 &1232506634482594543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,19 +159,123 @@ MonoBehaviour:
   m_GameObject: {fileID: 2729623321306919193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929d1eb81fbe7ad4a90b9d509bc9716c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9af3db96130675f4999b0e8ea57f0830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownDash: 0
---- !u!114 &1716127032
-MonoBehaviour:
+  groundSpeed: 15
+  sprintSpeed: 25
+  turnSpeed: 20
+  slidingSpeed: 10
+  slideSlopeLimit: 60
+  maxSlopeLimit: 80
+  airSpeed: 13
+  airSprintSpeed: 20
+  jumpDelay: 0.2
+  jumpHeight: 2
+  maxMultiJumps: 1
+  multiJumpHeight: 1
+  gravity: -9.81
+  dashSpeed: 0
+  dashDir: {x: 0, y: 0, z: 0}
+  dashVelocity: {x: 0, y: 0, z: 0}
+  hasDash: 1
+  isDashing: 0
+  jumpForce: 5
+  angleTolerance: 5
+--- !u!1 &3717929820942611320
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729623321306919193}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1005800582439167231}
+  - component: {fileID: 662025941731580216}
+  - component: {fileID: 486749838434912605}
+  - component: {fileID: 6365212223298915361}
+  m_Layer: 3
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1005800582439167231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717929820942611320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3106, z: 1.4966}
+  m_LocalScale: {x: 0.38704, y: 0.3788, z: 1.7412349}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2729623321306919197}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &662025941731580216
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717929820942611320}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &486749838434912605
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717929820942611320}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79366320059196144afd0af92adbb7a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c94a74f99c0325a41be8c65d32a3b907, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6365212223298915361
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717929820942611320}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

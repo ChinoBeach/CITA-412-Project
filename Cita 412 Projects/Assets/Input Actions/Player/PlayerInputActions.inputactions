@@ -294,6 +294,17 @@
                 },
                 {
                     "name": "",
+                    "id": "47c721ad-5721-4b72-b3cb-0d7fe7fd6092",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ca5822d7-1202-4c72-9d00-d3675366bc9d",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
@@ -310,6 +321,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6ec8fa4-bb23-4fa1-a981-b83238d3075b",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
