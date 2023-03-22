@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class MovingFloater : MonoBehaviour
 {
+    #region Variables
     //The path that the platform moves across
     [SerializeField] WayPointDirector waypointPath;
     int indexOfTargetWaypoint;
     Transform nextWaypoint;
     Transform previousWaypoint;
 
-    public Vector3 platformVelocity;
+    
 
     //How much the object will be incremeted in each axis
     [SerializeField] float fltSpeed;
+    public Vector3 floaterVelocity;
 
     //Time Variables, how long until hitting the next waypoint and how long has passed
     float timeToNextPos;
     float timePassed;
 
     /*END OF VARIABLES/START OF METHODS*/
-  
+    #endregion
+    #region UnityMethods
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +36,7 @@ public class MovingFloater : MonoBehaviour
     {
         //variable for the percentage of the path that has been completed
         float percentPathCompletion;
-
+        
         /*-------------------------------------------------------------------------------*/
 
         //increment time passed
@@ -43,10 +46,11 @@ public class MovingFloater : MonoBehaviour
         //smooth out the movement closer to the starting and ending points (slows down at the start and end)
         percentPathCompletion = Mathf.SmoothStep(0, 1, percentPathCompletion);
 
-        platformVelocity = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
+        //set the velocity
+        floaterVelocity = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
 
         //move the platform to the next point(smoothly)
-        transform.position = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
+        transform.position = floaterVelocity;
         //rotate the platform to match the points better
         transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
         //check if the floater has made it to the position(the path between has been completed)
@@ -56,9 +60,9 @@ public class MovingFloater : MonoBehaviour
             SelectNextWayPoint();
         }
 
-
     }//end of (fixed)update method
-
+    #endregion
+    #region WayPoint/FloaterMovement
     // SelectNextWayPoint is called in start to initalize the path, and also in update whenever the floater reaches a waypoint.
     void SelectNextWayPoint()
     {
@@ -83,29 +87,28 @@ public class MovingFloater : MonoBehaviour
         timeToNextPos = distBtwnPnts / fltSpeed;
 
     }//end of SelectNextWayPoint method
-
-   // OnTriggerEnter is called when the player steps onto the platform
+    #endregion
+    #region PlayerMovementOnFloater
+    // OnTriggerEnter is called when the player steps onto the platform
     private void OnTriggerEnter(Collider other)
     {
-        //parent the transform component
+        //parent the transform component so that the player will move relative to the floater.
         other.transform.SetParent(transform);
 
         //turn the players gravity off
         PlayerController.Instance.gravity = 0;
 
     }//end of OnTriggerEnter method 
-   
- 
     
     // OnTriggerExit is called when the player steps off of the platform
     private void OnTriggerExit(Collider other)
     {
-        //set the parent of the transform component back to empty(null)
+        //set the parent of the transform component back to empty(null) so that it stops moving with the floater.
         other.transform.SetParent(null);
 
         //turn the players gravity back on
         PlayerController.Instance.gravity = -9.81f;
 
     }//end of OnTriggerExitMethod 
-
+    #endregion
 }//end of Moving Floater class
