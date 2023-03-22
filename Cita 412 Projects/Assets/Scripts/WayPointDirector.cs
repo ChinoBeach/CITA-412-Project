@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class WayPointDirector : MonoBehaviour
 {
+    #region CurrentWayPoint
     //get the current waypoint that the floater is at
     public Transform GetCurWaypointIndex(int waypointIndex)
     {
         return transform.GetChild(waypointIndex);
     }
-
+    #endregion
+    #region UpcomingWayPoint
     //get the next waypoint in the path
     public int GetNextWaypointIndex(int curWaypointIndex)
     {
@@ -22,5 +24,6 @@ public class WayPointDirector : MonoBehaviour
 
         return nextWaypointIndex;
     }
+    #endregion
 }
 
