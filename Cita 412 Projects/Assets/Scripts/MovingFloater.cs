@@ -21,10 +21,16 @@ public class MovingFloater : MonoBehaviour
 
     //Variable for if the player is on the platform. 
     bool isPlayerTouching;
+    CharacterController player;
 
     /*END OF VARIABLES/START OF METHODS*/
     #endregion
     #region UnityMethods
+    // Awake is called when the scene loads
+    void Awake()
+    {
+        player = FindObjectOfType<CharacterController>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +64,7 @@ public class MovingFloater : MonoBehaviour
         if (isPlayerTouching)
         {
             //before moving the platform, disable the player. It will move with the player with it because it is parented.
+            player.enabled = false;
             
         }
 
@@ -68,6 +75,7 @@ public class MovingFloater : MonoBehaviour
         if (isPlayerTouching)
         {
             //after the platform is moved, re enable the player. 
+            player.enabled = true;
         }
             //rotate the platform to match the points better
             transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
