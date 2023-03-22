@@ -98,10 +98,8 @@ public class MovingFloater : MonoBehaviour
         other.transform.SetParent(null);
 
         //turn the players gravity back on
-
+       
 
     }//end of OnTriggerExitMethod
-
-
 
 }//end of Moving Floater class
