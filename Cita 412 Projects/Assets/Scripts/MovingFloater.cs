@@ -11,8 +11,6 @@ public class MovingFloater : MonoBehaviour
     Transform nextWaypoint;
     Transform previousWaypoint;
 
-    
-
     //How much the object will be incremeted in each axis
     [SerializeField] float fltSpeed;
     public Vector3 floaterVelocity;
@@ -21,13 +19,20 @@ public class MovingFloater : MonoBehaviour
     float timeToNextPos;
     float timePassed;
 
+    //Variable for if the player is on the platform. 
+    bool isPlayerTouching;
+
     /*END OF VARIABLES/START OF METHODS*/
     #endregion
     #region UnityMethods
     // Start is called before the first frame update
     void Start()
     {
+        //get the path started
         SelectNextWayPoint();
+
+        //default player does not start on a platform
+        isPlayerTouching = false;
        
     }//end of start method
 
@@ -49,10 +54,23 @@ public class MovingFloater : MonoBehaviour
         //set the velocity
         floaterVelocity = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
 
-        //move the platform to the next point(smoothly)
+        //if a player is on the platform. 
+        if (isPlayerTouching)
+        {
+            //before moving the platform, disable the player. It will move with the player with it because it is parented.
+            
+        }
+
+        //move the platform to the next point(smoothly) 
         transform.position = floaterVelocity;
-        //rotate the platform to match the points better
-        transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
+
+        //if a player is on the platform
+        if (isPlayerTouching)
+        {
+            //after the platform is moved, re enable the player. 
+        }
+            //rotate the platform to match the points better
+            transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
         //check if the floater has made it to the position(the path between has been completed)
         if (percentPathCompletion >= 1)
         {
@@ -96,7 +114,10 @@ public class MovingFloater : MonoBehaviour
         other.transform.SetParent(transform);
 
         //turn the players gravity off
-        PlayerController.Instance.gravity = 0;
+       // PlayerController.Instance.gravity = 0;
+
+        //tell the script that the player is on the floater.
+        isPlayerTouching = true;
 
     }//end of OnTriggerEnter method 
     
@@ -106,8 +127,8 @@ public class MovingFloater : MonoBehaviour
         //set the parent of the transform component back to empty(null) so that it stops moving with the floater.
         other.transform.SetParent(null);
 
-        //turn the players gravity back on
-        PlayerController.Instance.gravity = -9.81f;
+        //tell the script that the player is no longer on the floater.
+        isPlayerTouching = false;
 
     }//end of OnTriggerExitMethod 
     #endregion
