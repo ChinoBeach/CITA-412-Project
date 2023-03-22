@@ -10,6 +10,8 @@ public class MovingFloater : MonoBehaviour
     Transform nextWaypoint;
     Transform previousWaypoint;
 
+    public Vector3 platformVelocity;
+
     //How much the object will be incremeted in each axis
     [SerializeField] float fltSpeed;
 
@@ -40,6 +42,8 @@ public class MovingFloater : MonoBehaviour
         percentPathCompletion = timePassed / timeToNextPos;
         //smooth out the movement closer to the starting and ending points (slows down at the start and end)
         percentPathCompletion = Mathf.SmoothStep(0, 1, percentPathCompletion);
+
+        platformVelocity = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
 
         //move the platform to the next point(smoothly)
         transform.position = Vector3.Lerp(previousWaypoint.position, nextWaypoint.position, percentPathCompletion);
@@ -80,17 +84,19 @@ public class MovingFloater : MonoBehaviour
 
     }//end of SelectNextWayPoint method
 
-    // OnTriggerEnter is called when the player steps onto the platform
+   // OnTriggerEnter is called when the player steps onto the platform
     private void OnTriggerEnter(Collider other)
     {
         //parent the transform component
         other.transform.SetParent(transform);
 
         //turn the players gravity off
-        
+        PlayerController.Instance.gravity = 0;
 
-    }//end of OnTriggerEnter method
-
+    }//end of OnTriggerEnter method 
+   
+ 
+    
     // OnTriggerExit is called when the player steps off of the platform
     private void OnTriggerExit(Collider other)
     {
@@ -98,8 +104,8 @@ public class MovingFloater : MonoBehaviour
         other.transform.SetParent(null);
 
         //turn the players gravity back on
-       
+        PlayerController.Instance.gravity = -9.81f;
 
-    }//end of OnTriggerExitMethod
+    }//end of OnTriggerExitMethod 
 
 }//end of Moving Floater class

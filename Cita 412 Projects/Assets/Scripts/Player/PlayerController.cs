@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     // Variables.
     public static PlayerController Instance { get; private set; }
-    private CharacterController controller;
+    public CharacterController controller;
 
     // Input action vars.
     private PlayerInput playerInput;
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Height of jump off the ground."), Min(0f)] private float jumpHeight = 2.0f;
     [SerializeField, Tooltip("Amount of jumps in the air off the ground."), Min(0)] private int maxMultiJumps = 1;
     [SerializeField, Tooltip("Height of jumps in midair."), Min(0)] private float multiJumpHeight = 1.0f;
-    [SerializeField, Tooltip("How fast the player is pulled down.")] private float gravity = -9.81f;
+    [SerializeField, Tooltip("How fast the player is pulled down.")] public float gravity = -9.81f;
     // The current jumps you have.
     private int multiJumpAmount;
     // The current timer counting down before the player can jump.
