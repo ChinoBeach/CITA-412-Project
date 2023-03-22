@@ -85,6 +85,10 @@ public class MovingFloater : MonoBehaviour
     {
         //parent the transform component
         other.transform.SetParent(transform);
+
+        //turn the players gravity off
+        
+
     }//end of OnTriggerEnter method
 
     // OnTriggerExit is called when the player steps off of the platform
@@ -92,6 +96,10 @@ public class MovingFloater : MonoBehaviour
     {
         //set the parent of the transform component back to empty(null)
         other.transform.SetParent(null);
+
+        //turn the players gravity back on
+
+
     }//end of OnTriggerExitMethod
 
 

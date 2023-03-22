@@ -285,17 +285,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f24bf38b-bc1f-461a-a7c3-e0ceb27b0dfb",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ca5822d7-1202-4c72-9d00-d3675366bc9d",
                     "path": "<Keyboard>/ctrl",
                     "interactions": "",
