@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleporter : MonoBehaviour
+public class Teleporter : MonoBehaviour, IInteractable
 {
     // Async Level Loader Object
     [SerializeField] LevelLoader levelLoader;
@@ -12,6 +12,13 @@ public class Teleporter : MonoBehaviour
 
     // True when teleporting is initiating. Used to stop multiple calls from happening
     bool teleporting = false;
+
+    [SerializeField] private string prompt;
+    public string InteractionPrompt => prompt;
+    public bool Interact(Interactinator9000 interactor) {
+        Debug.Log("Interacted with Teleporter");
+        return true;
+    }
 
     void OnTriggerEnter(Collider other) {
         // If the collided object has the player tag
