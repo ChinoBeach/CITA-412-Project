@@ -15,17 +15,10 @@ public class Teleporter : MonoBehaviour, IInteractable
 
     [SerializeField] private string prompt;
     public string InteractionPrompt => prompt;
+    
     public bool Interact(Interactinator9000 interactor) {
-        Debug.Log("Interacted with Teleporter");
+        Teleport();
         return true;
-    }
-
-    void OnTriggerEnter(Collider other) {
-        // If the collided object has the player tag
-        if (other.tag == "Player") {
-            // Teleport
-            Teleport();
-        }
     }
 
     // Function to initiate the LevelLoader
