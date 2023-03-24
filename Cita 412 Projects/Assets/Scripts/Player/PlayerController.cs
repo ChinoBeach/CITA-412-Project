@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     // Variables.
     public static PlayerController Instance { get; private set; }
-    private CharacterController controller;
+    public CharacterController controller { get; private set; }
 
     // Input action vars.
     private PlayerInput playerInput;
@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Speed of player on the ground.")] private float sprintSpeed = 25f;
     [SerializeField, Tooltip("Speed of player turning to face the movement angle.")] private float turnSpeed = 2f;
     // The hit data of the ground the controller is standing on.
-    private ControllerColliderHit groundData = null;
-    private bool isPlayerGrounded = true;
+    [HideInInspector] public ControllerColliderHit groundData { get; private set; } = null;
+    [HideInInspector] public bool isPlayerGrounded { get; private set; } = true;
     private bool isSprinting = false;
 
     [Space(10), Header("Sliding Variables")]
@@ -62,15 +62,6 @@ public class PlayerController : MonoBehaviour
     // ground timer so the player can go down slopes and stairs without being off the ground.
     private float groundedTimer = 0f;
 
-    [Space(10), Header("Bellow Is Currently Unused")]
-
-    [Space(10), Header("Dash Variables")]
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private Vector3 dashDir;
-    [SerializeField] private Vector3 dashVelocity;
-    [SerializeField] private bool hasDash = true;
-    [SerializeField] private bool isDashing = false;
-
 
     [Space(10), Header("Wall Jump Variables")]
     [SerializeField, Tooltip("The strength after jumping off a wall")] private float jumpForce = 5;
@@ -78,6 +69,14 @@ public class PlayerController : MonoBehaviour
     //Check to see if player is touching a wall, maybe begin a wall slide.
     private bool isTouchingWall = false;
 
+    [Space(10), Header("Below Is Currently Unused")]
+
+    [Space(10), Header("Dash Variables")]
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private Vector3 dashDir;
+    [SerializeField] private Vector3 dashVelocity;
+    [SerializeField] private bool hasDash = true;
+    [SerializeField] private bool isDashing = false;
     #endregion Variables
 
     #region Unity Methods
@@ -94,13 +93,13 @@ public class PlayerController : MonoBehaviour
         {
             Instance = this;
         }
+
+        controller = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
-
         jumpAction = playerInput.actions["Jump"];
         moveAction = playerInput.actions["Move"];
         dashAction = playerInput.actions["Dash"];
@@ -129,16 +128,16 @@ public class PlayerController : MonoBehaviour
         // If the slope is tagged slippery, make it so jump height is halved or so.
 
         // Add something so a ground dash works a bit different (LATER!!!!!!)
-        if (dashAction.triggered && hasDash && Upgrade.Instance.ownDash)
-        {
-        }
+        //if (dashAction.triggered && hasDash && Upgrade.Instance.ownDash)
+        //{
+        //}
 
-        if (isDashing)
-        {
-        }
+        //if (isDashing)
+        //{
+        //}
 
         CheckIfSliding();
-        //CheckIfTouchingWall();
+        CheckIfTouchingWall();
 
         // TODO: implement a way to make characters move slower depending on a slope till a point where they will slide down it
         // TODO: instead of an if statement, these could probably simply be added together in order to get a mix of the two vectors, just make sure the slope speed takes presidence
@@ -211,7 +210,7 @@ public class PlayerController : MonoBehaviour
     /// Calculates the players movement while walking on the ground.
     /// </summary>
     /// <param name="moveInput">The player input this frame.</param>
-    /// <returns></returns>
+    /// <returns>The new movement direction.</returns>
     private Vector3 CalculateGroundMovement(Vector2 moveInput)
     {
         // Get directional input.
@@ -417,9 +416,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void FaceTowardMovementAngle()
     {
-        // TODO: Make a smooth turn algorithem to this so it doesnt just snap directions.
         if (move.magnitude > Mathf.Epsilon)
         {
+            // Spherically interp for smooth turning.
             transform.rotation = Quaternion.Slerp
                 (
                 transform.rotation,
