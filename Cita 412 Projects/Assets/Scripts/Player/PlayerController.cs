@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     // Variables.
     public static PlayerController Instance { get; private set; }
-    private CharacterController controller;
+    public CharacterController controller { get; private set; }
 
     // Input action vars.
     private PlayerInput playerInput;
@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("Speed of player on the ground.")] private float sprintSpeed = 25f;
     [SerializeField, Tooltip("Speed of player turning to face the movement angle.")] private float turnSpeed = 2f;
     // The hit data of the ground the controller is standing on.
-    private ControllerColliderHit groundData = null;
-    private bool isPlayerGrounded = true;
+    [HideInInspector] public ControllerColliderHit groundData { get; private set; } = null;
+    [HideInInspector] public bool isPlayerGrounded { get; private set; } = true;
     private bool isSprinting = false;
 
     [Space(10), Header("Sliding Variables")]
@@ -93,13 +93,13 @@ public class PlayerController : MonoBehaviour
         {
             Instance = this;
         }
+
+        controller = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
-
         jumpAction = playerInput.actions["Jump"];
         moveAction = playerInput.actions["Move"];
         dashAction = playerInput.actions["Dash"];
@@ -454,11 +454,4 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion Private Methods
-
-    #region Public Methods
-    //public void AddMove(Vector3 MoveDir)
-    //{
-    //    move += MoveDir;
-    //}
-    #endregion
 }

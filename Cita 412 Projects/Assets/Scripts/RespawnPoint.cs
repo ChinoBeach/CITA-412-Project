@@ -7,8 +7,8 @@ public class RespawnPoint : MonoBehaviour
 {
     #region Variables
     // Variables.
-    float distToPlayer;
-    GameObject player;
+    public float distToPlayer;
+    private GameObject player;
     [SerializeField, Tooltip("The radius around the point ")] float radius;
     #endregion
 

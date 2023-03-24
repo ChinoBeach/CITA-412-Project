@@ -22,7 +22,18 @@ public class RespawnPlaneEditor : Editor
 
         if(GUILayout.Button("Add New Respawn Point"))
         {
-            targetScript.AddNewRespawnPoint();
+            var point = targetScript.AddNewRespawnPoint();
+            Selection.activeObject = point;
+        }
+
+        if (GUILayout.Button("Delete Newest Respawn Point"))
+        {
+            targetScript.RemoveNewestRespawnPoint();
+        }
+
+        if (GUILayout.Button("Clear Respawn Points"))
+        {
+            targetScript.ClearAllRespawnPoints();
         }
     }
 

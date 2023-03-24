@@ -175,13 +175,13 @@ MonoBehaviour:
   maxMultiJumps: 1
   multiJumpHeight: 1
   gravity: -9.81
+  jumpForce: 5
+  angleTolerance: 10
   dashSpeed: 0
   dashDir: {x: 0, y: 0, z: 0}
   dashVelocity: {x: 0, y: 0, z: 0}
   hasDash: 1
   isDashing: 0
-  jumpForce: 5
-  angleTolerance: 15
 --- !u!1 &3717929820942611320
 GameObject:
   m_ObjectHideFlags: 0

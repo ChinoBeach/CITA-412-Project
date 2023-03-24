@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1434242432}
   m_Layer: 0
   m_Name: RespawnPlane
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,9 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b26528d0c2f98439ed28838ad15e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
   respawnPoint: {fileID: 6675794476454312912, guid: c72b265479806e94fb298909ed04afde, type: 3}
   respawnPoints: []
-  player: {fileID: 0}
+  respawnTime: 5
 --- !u!65 &1434242432
 BoxCollider:
   m_ObjectHideFlags: 0
