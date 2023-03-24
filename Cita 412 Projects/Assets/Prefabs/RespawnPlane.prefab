@@ -51,6 +51,7 @@ MonoBehaviour:
   respawnPoint: {fileID: 6675794476454312912, guid: c72b265479806e94fb298909ed04afde, type: 3}
   respawnPoints: []
   respawnTime: 5
+  checkTime: 3
 --- !u!65 &1434242432
 BoxCollider:
   m_ObjectHideFlags: 0
