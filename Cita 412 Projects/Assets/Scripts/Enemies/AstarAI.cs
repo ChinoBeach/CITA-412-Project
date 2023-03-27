@@ -10,6 +10,7 @@ public class AstarAI : MonoBehaviour {
     [SerializeField] float attackDistance;
 
     private bool isAttacking = false;
+    private bool isGameOver = false;
 
     int layerMask;
 
@@ -34,7 +35,18 @@ public class AstarAI : MonoBehaviour {
 
     public bool reachedEndOfPath;
 
+    Damageinator9000 damageinator;
+
+    void OnEnable() {
+        PlayerStats.onGameOver += OnGameOver;
+    }
+
+    void OnDisable() {
+        PlayerStats.onGameOver -= OnGameOver;
+    }
+
     public void Start () {
+        damageinator = GetComponentInChildren<Damageinator9000>();
         seeker = GetComponent<Seeker>();
         // If you are writing a 2D game you can remove this line
         // and use the alternative way to move sugggested further below.
@@ -66,8 +78,8 @@ public class AstarAI : MonoBehaviour {
     }
 
     public void Update () {
-        // Do nothing if there is no target
-        if (!targetPosition) return;
+        // Do nothing if there is no target or the game is over
+        if (!targetPosition || isGameOver) return;
 
         GoToTarget();
 
@@ -172,7 +184,18 @@ public class AstarAI : MonoBehaviour {
         Debug.Log("Attack target");
     }
 
+    // Resets isAttacking on last frame of attack animation
     void ResetIsAttacking() {
         isAttacking = false;
+    }
+
+    // Resets hasDoneDamage on last frame of attack animation
+    void ResetHasDoneDamage() {
+        damageinator.ResetHasDoneDamage();
+    }
+
+    // Called when onGameOver event is invoked
+    void OnGameOver() {
+        isGameOver = true;
     }
 }
