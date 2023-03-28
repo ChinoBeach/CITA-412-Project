@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     [Space(10), Header("Sliding Variables")]
     [SerializeField, Tooltip("Speed of player sliding down a slope."), Min(0f)] private float slidingSpeed = 10f;
+    [SerializeField, Tooltip("Speed of player input while sliding down a slope."), Min(0f)] private float slidingNudgeSpeed = 10f;
     [SerializeField, Tooltip("The slope of the ground below the player before they player will slide down it.")] private float slideSlopeLimit = 60f;
     [SerializeField, Tooltip("The slope of the ground where the player loses the ability to jump out of the slope.")] private float maxSlopeLimit = 80f;
     private bool isSliding = false;
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
         // Reset the movement
-        move = new Vector3();
+        move = new Vector3(moveInput.x, 0, moveInput.y);
 
         // Apply gravity then check if grounded.
         ApplyGravity();
@@ -151,14 +152,14 @@ public class PlayerController : MonoBehaviour
 
         else if (groundedTimer > 0)
         {
-            move = CalculateGroundMovement(moveInput);
+            move = CalculateGroundMovement();
             MoveRelativeToCam();
             FaceTowardMovementAngle();
         }
 
         else
         {
-            move = CalculateAirMovement(moveInput);
+            move = CalculateAirMovement();
             MoveRelativeToCam();
             FaceTowardMovementAngle();
         }
@@ -210,11 +211,10 @@ public class PlayerController : MonoBehaviour
     /// Calculates the players movement while walking on the ground.
     /// </summary>
     /// <param name="moveInput">The player input this frame.</param>
-    /// <returns>The new movement direction.</returns>
-    private Vector3 CalculateGroundMovement(Vector2 moveInput)
+    /// <returns></returns>
+    private Vector3 CalculateGroundMovement()
     {
-        // Get directional input.
-        move = new Vector3(moveInput.x, 0, moveInput.y);
+        AdjustVelocityToSlope();
 
         if (sprintAction.IsPressed())
         {
@@ -225,6 +225,7 @@ public class PlayerController : MonoBehaviour
             move *= groundSpeed;
         }
 
+        // Project on plane to make sure the player interacts properly with slopes.
         return move;
     }
 
@@ -233,10 +234,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="moveInput">The player input this frame.</param>
     /// <returns></returns>
-    private Vector3 CalculateAirMovement(Vector2 moveInput)
+    private Vector3 CalculateAirMovement()
     {
-        // Get directional input.
-        move = new Vector3(moveInput.x, 0, moveInput.y);
+        Debug.Log(Vector3.ProjectOnPlane(move, groundData.normal));
+        move = Vector3.ProjectOnPlane(move, groundData.normal);
 
         if (sprintAction.IsPressed())
         {
@@ -257,9 +258,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 CalculateSlidingMovement()
     {
         // TODO: also add something like the grounded timer for jumping so the player will slide down slopes with even small sections of non steep slope so the player cant glitch out the detection.
-        Vector3 slideVelocity = Vector3.ProjectOnPlane(new Vector3(0, -slidingSpeed, 0), groundData.normal);
-        Debug.Log($"Slope Velocity: {slideVelocity}");
-        return slideVelocity; // * new Vector3(moveInput.x, slidingSpeed, moveInput.y);
+        Debug.Log($"Slope: {groundData.normal}");
+        Vector3 slideVelocity = Vector3.ProjectOnPlane(new Vector3(move.x, -slidingSpeed, move.y), groundData.normal);
+        return slideVelocity;
     }
 
     // TODO: maybe make this a coroutine;
@@ -451,6 +452,32 @@ public class PlayerController : MonoBehaviour
         }
 
         isTouchingWall = true;
+        // If we are touching a wall, force sliding state to false.
+        // If you touch a wall and are not grounded, you will slow down and do a slide which you can then wall jump from.
+    }
+
+    /// <summary>
+    /// Credit to Ketra Games for this slope code.
+    /// https://www.youtube.com/watch?v=PEHtceu7FBw
+    /// </summary>
+    /// <param name="move">The initial movement.</param>
+    /// <returns>New movement aligned to the slope.</returns>
+    private void AdjustVelocityToSlope()
+    {
+        //var slopeRotation = Quaternion.FromToRotation(Vector3.up, groundData.normal);
+        //var adjustedMove = slopeRotation * move;
+
+        //if (adjustedMove.y < 0 )
+        //{
+        //    return adjustedMove;
+        //}
+
+        //return move;
+
+        if (groundData.normal.y < 1)
+        {
+            move.y = groundData.normal.normalized.y;
+        }
     }
 
     #endregion Private Methods
