@@ -290,6 +290,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8773529243061142862, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773529243061142862, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8773529243512860887, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -426,6 +434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e302f96909b3fc41b3a4cab495914cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPlayerHealth: 100
+  healthSlider: {fileID: 1125098959}
+  healthText: {fileID: 1764584847}
 --- !u!1 &475054482 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1147708895, guid: f5a537e758e4a5f4bb7fca18a1646fca, type: 3}
@@ -443,6 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a154c8638102ea24fbeebbace28a67ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 40
+  hasDoneDamage: 0
 --- !u!1 &541498457
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +653,17 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c94a74f99c0325a41be8c65d32a3b907, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
+--- !u!114 &1125098959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773529243061142862, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+  m_PrefabInstance: {fileID: 317382334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1146584962 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8773529242583192620, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
@@ -818,6 +842,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1764584847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773529243400149538, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+  m_PrefabInstance: {fileID: 317382334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1775979103
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +912,39 @@ MonoBehaviour:
     _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
     _AreaColors:
     - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
   heuristic: 2
   heuristicScale: 1
   threadCount: 1

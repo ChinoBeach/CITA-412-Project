@@ -8,7 +8,7 @@ public class Damageinator9000 : MonoBehaviour
     public int damage = 40;
 
     // Whether or not the weapon has done damage during the animation
-    private bool hasDoneDamage = false;
+    public bool hasDoneDamage = false;
 
     void OnTriggerEnter(Collider collider) {
         // If the collider hits the player and damage has not been done yet
