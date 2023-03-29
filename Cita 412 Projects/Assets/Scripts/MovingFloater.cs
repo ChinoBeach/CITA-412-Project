@@ -71,14 +71,13 @@ public class MovingFloater : MonoBehaviour
         //move the platform to the next point(smoothly) 
         transform.position = floaterVelocity;
 
-        //if a player is on the platform
-        if (isPlayerTouching)
-        {
-            //after the platform is moved, re enable the player. 
-            player.enabled = true;
-        }
-            //rotate the platform to match the points better
-            transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
+      
+        //after the platform is moved, re enable the player. 
+        player.enabled = true;
+        
+        //rotate the platform to match the points better
+        transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
+
         //check if the floater has made it to the position(the path between has been completed)
         if (percentPathCompletion >= 1)
         {
@@ -120,9 +119,7 @@ public class MovingFloater : MonoBehaviour
     {
         //parent the transform component so that the player will move relative to the floater.
         other.transform.SetParent(transform);
-
-        //turn the players gravity off
-       // PlayerController.Instance.gravity = 0;
+        
 
         //tell the script that the player is on the floater.
         isPlayerTouching = true;
@@ -133,8 +130,9 @@ public class MovingFloater : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         //set the parent of the transform component back to empty(null) so that it stops moving with the floater.
-        other.transform.SetParent(null);
-
+        if (other.CompareTag("Player"))
+        { player.transform.SetParent(null);Debug.Log("Unparented"); }
+        
         //tell the script that the player is no longer on the floater.
         isPlayerTouching = false;
 
