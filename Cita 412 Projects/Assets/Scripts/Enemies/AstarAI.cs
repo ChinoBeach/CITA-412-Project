@@ -93,7 +93,7 @@ public class AstarAI : MonoBehaviour {
 
     void OnTriggerStay(Collider collider) {
         // If the collided object is the player
-        if (collider.gameObject.tag == "Player") {
+        if (collider.gameObject.CompareTag("Player")) {
             // Stop the coroutine that removes the target object
             StopCoroutine(ResetTarget());
 

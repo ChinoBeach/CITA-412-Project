@@ -12,7 +12,7 @@ public class Damageinator9000 : MonoBehaviour
 
     void OnTriggerEnter(Collider collider) {
         // If the collider hits the player and damage has not been done yet
-        if (collider.tag == "Player" && !hasDoneDamage) {
+        if (collider.CompareTag("Player") && !hasDoneDamage) {
             // Deal amount of damage to player health
             collider.gameObject.GetComponent<PlayerStats>().PlayerHealth -= damage;
 

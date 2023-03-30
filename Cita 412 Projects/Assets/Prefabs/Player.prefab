@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2729623321306919197}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2729623321306919193
 GameObject:
@@ -46,8 +46,7 @@ GameObject:
   - component: {fileID: 2729623321306919171}
   - component: {fileID: 414698259486099617}
   - component: {fileID: 1232506634482594543}
-  - component: {fileID: 3903659893203802295}
-  - component: {fileID: 323017015}
+  - component: {fileID: 2099035880}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -68,6 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1005800582439167231}
+  - {fileID: 881097927}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -215,6 +215,25 @@ MonoBehaviour:
   dashVelocity: {x: 0, y: 0, z: 0}
   hasDash: 1
   isDashing: 0
+--- !u!114 &2099035880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729623321306919193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d101b6f274fe0b9488a73fa9466e9849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionPoint: {fileID: 881097927}
+  interactionPointRadius: 3
+  interactableMask:
+    serializedVersion: 2
+    m_Bits: 256
+  interactionUIPrompt: {fileID: 0}
+  numFound: 0
 --- !u!1 &3717929820942611320
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,16 +331,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
-  m_GameObject: {fileID: 2729623321306919193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d101b6f274fe0b9488a73fa9466e9849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionPoint: {fileID: 881097927}
-  interactionPointRadius: 2.04
-  interactableMask:
-    serializedVersion: 2
-    m_Bits: 256
-  interactionUIPrompt: {fileID: 0}
-  numFound: 0
