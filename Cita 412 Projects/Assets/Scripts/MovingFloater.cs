@@ -117,12 +117,14 @@ public class MovingFloater : MonoBehaviour
     // OnTriggerEnter is called when the player steps onto the platform
     private void OnTriggerEnter(Collider other)
     {
-        //parent the transform component so that the player will move relative to the floater.
-        other.transform.SetParent(transform);
-        
+        if (other.CompareTag("Player"))
+        {
+            //parent the transform component so that the player will move relative to the floater.
+            other.transform.SetParent(transform);
 
-        //tell the script that the player is on the floater.
-        isPlayerTouching = true;
+            //tell the script that the player is on the floater.
+            isPlayerTouching = true;
+        }
 
     }//end of OnTriggerEnter method 
     
@@ -131,10 +133,11 @@ public class MovingFloater : MonoBehaviour
     {
         //set the parent of the transform component back to empty(null) so that it stops moving with the floater.
         if (other.CompareTag("Player"))
-        { player.transform.SetParent(null);Debug.Log("Unparented"); }
-        
-        //tell the script that the player is no longer on the floater.
-        isPlayerTouching = false;
+        { 
+            player.transform.SetParent(null);
+            //tell the script that the player is no longer on the floater.
+            isPlayerTouching = false;
+        }
 
     }//end of OnTriggerExitMethod 
     #endregion
