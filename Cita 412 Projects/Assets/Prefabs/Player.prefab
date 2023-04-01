@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2729623321306919171}
   - component: {fileID: 414698259486099617}
   - component: {fileID: 1232506634482594543}
+  - component: {fileID: 7381718323892063612}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -162,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af3db96130675f4999b0e8ea57f0830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   groundSpeed: 15
   sprintSpeed: 25
   turnSpeed: 20
@@ -182,6 +184,22 @@ MonoBehaviour:
   isDashing: 0
   jumpForce: 5
   angleTolerance: 5
+--- !u!54 &7381718323892063612
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729623321306919193}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3717929820942611320
 GameObject:
   m_ObjectHideFlags: 0

@@ -65,15 +65,17 @@ public class MovingFloater : MonoBehaviour
         {
             //before moving the platform, disable the player. It will move with the player with it because it is parented.
             player.enabled = false;
-            
         }
 
         //move the platform to the next point(smoothly) 
         transform.position = floaterVelocity;
 
-      
-        //after the platform is moved, re enable the player. 
-        player.enabled = true;
+       //if the player is still
+        if (isPlayerTouching)
+        {
+            //after the platform is moved, re enable the player. 
+            player.enabled = true;
+        }
         
         //rotate the platform to match the points better
         transform.rotation = Quaternion.Lerp(previousWaypoint.rotation, nextWaypoint.rotation, percentPathCompletion);
@@ -115,8 +117,9 @@ public class MovingFloater : MonoBehaviour
     #endregion
     #region PlayerMovementOnFloater
     // OnTriggerEnter is called when the player steps onto the platform
-    private void OnTriggerEnter(Collider other)
+   private void OnTriggerEnter(Collider other)
     {
+        //if its the player
         if (other.CompareTag("Player"))
         {
             //parent the transform component so that the player will move relative to the floater.
@@ -131,14 +134,21 @@ public class MovingFloater : MonoBehaviour
     // OnTriggerExit is called when the player steps off of the platform
     private void OnTriggerExit(Collider other)
     {
-        //set the parent of the transform component back to empty(null) so that it stops moving with the floater.
+        //if its the player
         if (other.CompareTag("Player"))
-        { 
+        {
+            //set the parent of the transform component back to empty(null) so that it stops moving with the floater.
             player.transform.SetParent(null);
+
             //tell the script that the player is no longer on the floater.
             isPlayerTouching = false;
         }
 
     }//end of OnTriggerExitMethod 
+  
+
     #endregion
+  
+
+
 }//end of Moving Floater class
