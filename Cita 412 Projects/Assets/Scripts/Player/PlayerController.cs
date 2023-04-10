@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 /// </summary>
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     #region Variables
