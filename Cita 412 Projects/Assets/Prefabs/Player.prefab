@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2729623321306919197}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2729623321306919193
 GameObject:
@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 414698259486099617}
   - component: {fileID: 1232506634482594543}
   - component: {fileID: 2099035880}
+  - component: {fileID: 323017016}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -66,8 +67,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1005800582439167231}
   - {fileID: 881097927}
+  - {fileID: 1005800582439167231}
+  - {fileID: 5145359513857213519}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,7 +211,7 @@ MonoBehaviour:
   multiJumpHeight: 1
   gravity: -9.81
   jumpForce: 5
-  angleTolerance: 10
+  angleTolerance: 15
   dashSpeed: 0
   dashDir: {x: 0, y: 0, z: 0}
   dashVelocity: {x: 0, y: 0, z: 0}
@@ -227,13 +229,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d101b6f274fe0b9488a73fa9466e9849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionPoint: {fileID: 881097927}
+  interactionPoint: {fileID: 5145359513857213519}
   interactionPointRadius: 3
   interactableMask:
     serializedVersion: 2
     m_Bits: 256
   interactionUIPrompt: {fileID: 0}
   numFound: 0
+--- !u!114 &323017016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729623321306919193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e302f96909b3fc41b3a4cab495914cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayerHealth: 100
+  healthSlider: {fileID: 0}
+  healthText: {fileID: 0}
 --- !u!1 &3717929820942611320
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +283,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2729623321306919197}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &662025941731580216
 MeshFilter:
@@ -331,3 +348,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8390528284081185241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5145359513857213519}
+  m_Layer: 3
+  m_Name: InteractionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5145359513857213519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390528284081185241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2729623321306919197}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

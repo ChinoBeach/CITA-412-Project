@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -891,6 +891,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8773529243061142862, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773529243061142862, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8773529243512860887, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -918,6 +926,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec06f9f5aa1e0b479a3c8d4dfbcf56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &922969558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773529243061142862, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+  m_PrefabInstance: {fileID: 922969555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &922969559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773529243400149538, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+  m_PrefabInstance: {fileID: 922969555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2099035878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -925,6 +955,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 922969559}
+    - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 922969558}
     - target: {fileID: 2099035880, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
       propertyPath: interactionUIPrompt
       value: 

@@ -314,20 +314,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8773529242141350871, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
   m_PrefabInstance: {fileID: 317382334}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &317382340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317382335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ec06f9f5aa1e0b479a3c8d4dfbcf56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactPromptText: {fileID: 1146584962}
-  isDisplayed: 0
 --- !u!1001 &323017012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -335,14 +321,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1232506634482594543, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-      propertyPath: angleTolerance
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2729623321306919170, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-      propertyPath: airSpeed
-      value: 13
-      objectReference: {fileID: 0}
+    - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1764584847}
+    - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1125098959}
     - target: {fileID: 2729623321306919193, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -398,64 +384,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2729623321306919197, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
   m_PrefabInstance: {fileID: 323017012}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &323017014 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2729623321306919193, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
-  m_PrefabInstance: {fileID: 323017012}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &323017015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323017014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d101b6f274fe0b9488a73fa9466e9849, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionPoint: {fileID: 881097927}
-  interactionPointRadius: 2.04
-  interactableMask:
-    serializedVersion: 2
-    m_Bits: 256
-  interactionUIPrompt: {fileID: 317382340}
-  numFound: 0
---- !u!114 &323017016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323017014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e302f96909b3fc41b3a4cab495914cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayerHealth: 100
-  healthSlider: {fileID: 1125098959}
-  healthText: {fileID: 1764584847}
---- !u!1 &475054482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1147708895, guid: f5a537e758e4a5f4bb7fca18a1646fca, type: 3}
-  m_PrefabInstance: {fileID: 829649084}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &475054484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475054482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a154c8638102ea24fbeebbace28a67ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 40
-  hasDoneDamage: 0
 --- !u!1 &541498457
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,37 +473,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5a537e758e4a5f4bb7fca18a1646fca, type: 3}
---- !u!1 &881097926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 881097927}
-  m_Layer: 3
-  m_Name: InteractionPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &881097927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881097926}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 323017013}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &966567979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -637,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6344830236769218213, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
       propertyPath: prompt
-      value: Teleporter
+      value: Main Island Teleporter
       objectReference: {fileID: 0}
     - target: {fileID: 6344830236769218213, guid: 9fd17bc15ffc85340b0d76417848d514, type: 3}
       propertyPath: levelLoader
@@ -662,17 +559,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1146584962 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8773529242583192620, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
-  m_PrefabInstance: {fileID: 317382334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1461451468
