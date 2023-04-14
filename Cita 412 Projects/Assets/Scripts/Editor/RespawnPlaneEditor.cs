@@ -11,7 +11,6 @@ public class RespawnPlaneEditor : Editor
     private void OnEnable()
     {
         EditorUtility.SetDirty(target);
-    
     }
 
     public override void OnInspectorGUI()

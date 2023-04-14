@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         slideSlopeLimit = controller.slopeLimit;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
     /// <returns></returns>
     private Vector3 CalculateAirMovement()
     {
-        Debug.Log(Vector3.ProjectOnPlane(move, groundData.normal));
+        //Debug.Log(Vector3.ProjectOnPlane(move, groundData.normal));
         move = Vector3.ProjectOnPlane(move, groundData.normal);
 
         if (sprintAction.IsPressed())
