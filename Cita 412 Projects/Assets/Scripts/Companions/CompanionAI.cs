@@ -6,14 +6,23 @@ using Pathfinding;
 
 [HelpURL("http://arongranberg.com/astar/documentation/stable/class_partial1_1_1_astar_a_i.php")]
 public class CompanionAI : MonoBehaviour {
+    [SerializeField] const float MAX_PLAYER_DISTANCE = 100f;
     [SerializeField] float targetResetTimer;
     [SerializeField] float attackDistance;
     [SerializeField] float playerFollowDistance;
+
+    [SerializeField] LayerMask interactableMask;
+    [SerializeField] float interactionPointRadius;
+    [SerializeField] Transform interactionPoint;
+
+
+    private readonly Collider[] colliders =  new Collider[3];
 
     private bool isAttacking = false;
     private bool isGameOver = false;
 
     int layerMask;
+    [SerializeField] private int numFound;
 
     Vector3 moveDir;
 
@@ -78,9 +87,21 @@ public class CompanionAI : MonoBehaviour {
     }
 
     public void Update () {
-        // Do nothing if there is no target or the game is over
-        if (targetPosition != playerPosition || Vector3.Distance(playerPosition.position, transform.position) <= playerFollowDistance || isGameOver) return;
+        // If the distance between the player and companion is too much set target to player
+        if (GetPlayerDistance() >= MAX_PLAYER_DISTANCE) SetTarget(playerPosition);
         
+        // Do nothing if there is no target or the game is over
+        if (!targetPosition
+            || GetPlayerDistance() <= playerFollowDistance
+            || isGameOver) return;
+
+        numFound = Physics.OverlapSphereNonAlloc(
+            interactionPoint.position,
+            interactionPointRadius,
+            colliders,
+            interactableMask
+        );
+
         GoToTarget();
 
         RaycastHit hit;
@@ -98,7 +119,7 @@ public class CompanionAI : MonoBehaviour {
             StopCoroutine(ResetTarget());
 
             // If there is not already a target object set the target to the collided object
-            if (!targetPosition) SetTarget(collider.transform);
+            if (!targetPosition || targetPosition == playerPosition) SetTarget(collider.transform);
         }
     }
 
@@ -117,7 +138,7 @@ public class CompanionAI : MonoBehaviour {
         // Wait for a specified amount of time
         yield return new WaitForSeconds(targetResetTimer);
         
-        // Set target object to null to stop following
+        // Set target object to player
         SetTarget(playerPosition);
     }
 
@@ -178,6 +199,10 @@ public class CompanionAI : MonoBehaviour {
         transform.LookAt(targetPosition);
     }
 
+    float GetPlayerDistance() {
+        return Vector3.Distance(playerPosition.position, transform.position);
+    }
+
     void Attack() {
         isAttacking = true;
         animator.SetTrigger("Base_Attack");
@@ -197,5 +222,11 @@ public class CompanionAI : MonoBehaviour {
     // Called when onGameOver event is invoked
     void OnGameOver() {
         isGameOver = true;
+    }
+
+    void OnDrawGizmos() {
+        // Draws the interact sphere
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(interactionPoint.position, interactionPointRadius);
     }
 }
