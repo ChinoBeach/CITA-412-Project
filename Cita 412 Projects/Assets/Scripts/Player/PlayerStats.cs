@@ -41,6 +41,20 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public int PlayerMana
+    {
+        get { return playerMana; }
+        set 
+        { 
+            playerMana = value;
+
+            if(playerMana >= maxPlayerMana)
+            {
+                playerMana = maxPlayerMana;
+            }
+        }
+    }
+
     void GameOver() {
         // Invoke gameover event
         onGameOver();
