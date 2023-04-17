@@ -6,7 +6,9 @@ using Pathfinding;
 
 [HelpURL("http://arongranberg.com/astar/documentation/stable/class_partial1_1_1_astar_a_i.php")]
 public class CompanionAI : MonoBehaviour {
-    [SerializeField] const float MAX_PLAYER_DISTANCE = 100f;
+    const float MAX_PLAYER_DISTANCE = 75f;
+    const float PLAYER_TELEPORT_DISTANCE = 100f;
+
     [SerializeField] float targetResetTimer;
     [SerializeField] float attackDistance;
     [SerializeField] float playerFollowDistance;
@@ -14,7 +16,6 @@ public class CompanionAI : MonoBehaviour {
     [SerializeField] LayerMask interactableMask;
     [SerializeField] float interactionPointRadius;
     [SerializeField] Transform interactionPoint;
-
 
     private readonly Collider[] colliders =  new Collider[3];
 
@@ -89,6 +90,7 @@ public class CompanionAI : MonoBehaviour {
     public void Update () {
         // If the distance between the player and companion is too much set target to player
         if (GetPlayerDistance() >= MAX_PLAYER_DISTANCE) SetTarget(playerPosition);
+        if (GetPlayerDistance() >= PLAYER_TELEPORT_DISTANCE) TeleportToPlayer();
         
         // Do nothing if there is no target or the game is over
         if (!targetPosition
@@ -197,6 +199,10 @@ public class CompanionAI : MonoBehaviour {
 
         // Look at target so raycast hits
         transform.LookAt(targetPosition);
+    }
+
+    void TeleportToPlayer() {
+        this.transform.position = playerPosition.position;
     }
 
     float GetPlayerDistance() {
