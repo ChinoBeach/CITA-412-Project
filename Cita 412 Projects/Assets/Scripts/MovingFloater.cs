@@ -25,6 +25,7 @@ public class MovingFloater : MonoBehaviour
 
     /*END OF VARIABLES/START OF METHODS*/
     #endregion
+
     #region UnityMethods
     // Awake is called when the scene loads
     void Awake()
@@ -65,6 +66,7 @@ public class MovingFloater : MonoBehaviour
         {
             //before moving the platform, disable the player. It will move with the player with it because it is parented.
             player.enabled = false;
+            Physics.SyncTransforms();
         }
 
         //move the platform to the next point(smoothly) 
@@ -75,6 +77,7 @@ public class MovingFloater : MonoBehaviour
         {
             //after the platform is moved, re enable the player. 
             player.enabled = true;
+            Physics.SyncTransforms();
         }
         
         //rotate the platform to match the points better
@@ -89,6 +92,7 @@ public class MovingFloater : MonoBehaviour
 
     }//end of (fixed)update method
     #endregion
+
     #region WayPoint/FloaterMovement
     // SelectNextWayPoint is called in start to initalize the path, and also in update whenever the floater reaches a waypoint.
     void SelectNextWayPoint()
@@ -115,6 +119,7 @@ public class MovingFloater : MonoBehaviour
 
     }//end of SelectNextWayPoint method
     #endregion
+
     #region PlayerMovementOnFloater
     // OnTriggerEnter is called when the player steps onto the platform
    private void OnTriggerEnter(Collider other)
@@ -148,7 +153,4 @@ public class MovingFloater : MonoBehaviour
   
 
     #endregion
-  
-
-
 }//end of Moving Floater class
