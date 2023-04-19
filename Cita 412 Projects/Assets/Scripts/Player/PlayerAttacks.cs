@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAttacks : MonoBehaviour
 {
-    /*
-     * Thoughtspace: 
-     * need to do a targeting system that pulls the closest enemy using tags. 
-     * I added tags to the enemies
-     * need to deal damage to the enemy
-     * need to check in range raycast length and distance to see if hit
-     * check to see if it still hits 
-     * need to wait to do damage until it checks if it hits
-     * check in range check if hit
-     * 
-     * projectile caster and and projectile script
-     */
 
-    //Variables
 
-   // [SerializeField] target
+    /*----------Variables---------*/
+
+    //point/postion where casting 
+    [SerializeField] private Transform pos_castPoint;
+
+    //is there a spell being cast currently
+    private bool bol_isCasting = false;
+
+    //player input system
+    private PlayerInput playerInput;
+    private InputAction castSpellInput;
+
+    // Awake is called before Start
+    private void Awake()
+    {
+        //connect the player input actions to the class
+        playerInput = GetComponent<PlayerInput>();
+        castSpellInput = playerInput.actions["Spell Cast"];
+
+    }
+
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +39,14 @@ public class PlayerAttacks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //vairable for if the spell is being held down
+        //bool bol_isHoldingCast = playerInput.controls
+
+        //if the player is not casting a spell yet but is pressing the cast button
+        if(!bol_isCasting && bol_isHoldingCast) 
+        {
+            bol_isCasting = true;
+            
+        }
     }
 }

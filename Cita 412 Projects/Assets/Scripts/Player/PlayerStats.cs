@@ -8,9 +8,11 @@ public class PlayerStats : MonoBehaviour
 {
     private int playerHealth = 100;
     [SerializeField] private int maxPlayerHealth = 100;
-    private int playerMana = 100;
-    private int maxPlayerMana = 100;
+    [SerializeField] private float playerMana = 100f;
+    [SerializeField] private float maxPlayerMana = 100f;
+    [SerializeField] private float manaRegenRate = 2f;
 
+    
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI healthText;
 
@@ -41,7 +43,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public int PlayerMana
+    public float PlayerMana
     {
         get { return playerMana; }
         set 
