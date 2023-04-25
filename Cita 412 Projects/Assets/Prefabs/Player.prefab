@@ -71,6 +71,7 @@ Transform:
   - {fileID: 881097927}
   - {fileID: 1005800582439167231}
   - {fileID: 5145359513857213519}
+  - {fileID: 1631737284709127869}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,6 +251,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayerHealth: 100
+  playerMana: 100
+  maxPlayerMana: 100
+  manaRegenRate: 2
   healthSlider: {fileID: 0}
   healthText: {fileID: 0}
 --- !u!114 &7120875096357139042
@@ -264,6 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5682d95264f308f41a56813b7672945d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos_castPoint: {fileID: 0}
+  flt_maxSpellTime: 0.25
 --- !u!1 &3717929820942611320
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +367,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5131031535662149754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1631737284709127869}
+  m_Layer: 3
+  m_Name: SpellCastPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1631737284709127869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5131031535662149754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.277, z: 0.665}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2729623321306919197}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8390528284081185241
 GameObject:
   m_ObjectHideFlags: 0
