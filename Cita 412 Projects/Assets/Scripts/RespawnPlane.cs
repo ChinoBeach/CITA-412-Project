@@ -38,19 +38,19 @@ public class RespawnPlane : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
 
-        foreach (var point in respawnPoints)
-        {
-            if (point != nearestPoint) Gizmos.DrawLine(point.transform.position, GameObject.FindObjectOfType<PlayerController>().transform.position);
-        }
+    //    foreach (var point in respawnPoints)
+    //    {
+    //        if (point != nearestPoint) Gizmos.DrawLine(point.transform.position, GameObject.FindObjectOfType<PlayerController>().transform.position);
+    //    }
 
-        Gizmos.color = Color.green;
+    //    Gizmos.color = Color.green;
 
-        Gizmos.DrawLine(nearestPoint.transform.position, GameObject.FindObjectOfType<PlayerController>().transform.position);
-    }
+    //    Gizmos.DrawLine(nearestPoint.transform.position, GameObject.FindObjectOfType<PlayerController>().transform.position);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
