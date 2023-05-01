@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* -----Required compnents----- */
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
 public class Spell : MonoBehaviour
@@ -26,6 +27,9 @@ public class Spell : MonoBehaviour
         //set the rigidbody up
         spellRigidbody = GetComponent<Rigidbody>();
         spellRigidbody.isKinematic = true;
+
+        //destroy the spell if the time is up (incase it didnt hit anything)
+        Destroy(this.gameObject, CurrentSpellCasting.flt_Duration);
     }
 
 
@@ -35,9 +39,18 @@ public class Spell : MonoBehaviour
         if (CurrentSpellCasting.flt_movementSpeed > 0)
         {
             //move the spell forward
-            transform.Translate(transform.forward * CurrentSpellCasting.flt_movementSpeed * Time.deltaTime;
+            transform.Translate(transform.forward * CurrentSpellCasting.flt_movementSpeed * Time.deltaTime);
 
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //If it hits an enemy
+        //deal damage
+
+        //destroy the object when it hits something
+        Destroy(this.gameObject);
     }
 }

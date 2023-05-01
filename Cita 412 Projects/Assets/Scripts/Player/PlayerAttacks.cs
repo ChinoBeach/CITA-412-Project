@@ -9,6 +9,9 @@ public class PlayerAttacks : MonoBehaviour
 
     /*----------Variables---------*/
 
+    //Spell itself
+    [SerializeField] private Spell spellPrepared;
+
     //point/postion where casting 
     [SerializeField] private Transform pos_castPoint;
 
@@ -79,7 +82,9 @@ public class PlayerAttacks : MonoBehaviour
     // Cast Spell is called when the player presses the spell attack button
     void CastSpell()
     {
-        //cast the spell
+        //create/cast the spell
+        Instantiate(spellPrepared, pos_castPoint.position, pos_castPoint.rotation);
+        
 
     }//end castspell method
 

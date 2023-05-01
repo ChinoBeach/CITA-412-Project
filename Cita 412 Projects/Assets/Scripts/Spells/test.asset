@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: test
+  m_EditorClassIdentifier: Assembly-CSharp::SpellScriptableObject
+  flt_Damage: 10
+  flt_ManaCost: 5
+  flt_Duration: 2
+  flt_movementSpeed: 15
+  flt_SpellRadius: 0.5
