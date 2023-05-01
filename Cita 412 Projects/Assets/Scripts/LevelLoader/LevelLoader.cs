@@ -10,6 +10,8 @@ public class LevelLoader : MonoBehaviour
     // Progress of async loading
     float LoadProgress = 0f;
 
+    bool isLoadingScene = false;
+
     // Canvas' to show and hide during loading
     [SerializeField] GameObject[] CanvasToHide;
     [SerializeField] GameObject LoadingCanvas;
@@ -20,6 +22,9 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] TextMeshProUGUI LoadingProgressText;
 
     public void LoadScene(int SceneIndex) {
+        if (isLoadingScene) return;
+        isLoadingScene = true;
+        
         // Start scene loading coroutine
         StartCoroutine(StartLoadingScreen(SceneIndex));
     }
