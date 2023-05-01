@@ -5,18 +5,22 @@ using UnityEngine.UI;
 
 public class OptionsMenuController : MonoBehaviour
 {
+    [Header("Volume Sliders")]
     [SerializeField] Slider masterVolumeSlider;
     [SerializeField] Slider musicVolumeSlider;
     [SerializeField] Slider effectsVolumeSlider;
     [SerializeField] Slider dialogueVolumeSlider;
-    
+
+    [Space(10), Header("Fullscreen Toggle Button")]
     [SerializeField] Toggle fullscreenToggle;
     
+    [Space(10), Header("Option Menu Panels")]
     [SerializeField] GameObject videoPanel;
     [SerializeField] GameObject audioPanel;
     [SerializeField] GameObject accessibilityPanel;
     [SerializeField] GameObject controlsPanel;
 
+    [Space(10), Header("Main/Option Menu Objects")]
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject optionsMenu;
     
