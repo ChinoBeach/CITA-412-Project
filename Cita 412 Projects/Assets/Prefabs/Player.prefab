@@ -268,7 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5682d95264f308f41a56813b7672945d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos_castPoint: {fileID: 0}
+  spellPrepared: {fileID: 2819271647594136694, guid: 766d7d8589ea22b4bb713e58027f00b0, type: 3}
+  pos_castPoint: {fileID: 1631737284709127869}
   flt_maxSpellTime: 0.25
 --- !u!1 &3717929820942611320
 GameObject:
