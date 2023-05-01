@@ -38,6 +38,20 @@ public class RespawnPlane : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+
+    //    foreach (var point in respawnPoints)
+    //    {
+    //        if (point != nearestPoint) Gizmos.DrawLine(point.transform.position, GameObject.FindObjectOfType<PlayerController>().transform.position);
+    //    }
+
+    //    Gizmos.color = Color.green;
+
+    //    Gizmos.DrawLine(nearestPoint.transform.position, GameObject.FindObjectOfType<PlayerController>().transform.position);
+    //}
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -73,6 +87,7 @@ public class RespawnPlane : MonoBehaviour
     private void RegenerateNames()
     {
         int i = 0;
+
         foreach (var point in respawnPoints)
         {
             i++;
@@ -90,7 +105,9 @@ public class RespawnPlane : MonoBehaviour
             // Make sure the player is grounded.
             if (PlayerController.Instance.groundData.collider == null || !PlayerController.Instance.isPlayerGrounded)
             {
+                Debug.Log("Unable to update point");
                 yield return new WaitForEndOfFrame();
+                continue;
             }
 
             var layer = PlayerController.Instance.groundData.gameObject.layer;
@@ -98,7 +115,8 @@ public class RespawnPlane : MonoBehaviour
             // Check if the player is on a surface that will update the respawn position.
             if (mask != (mask | (1 << layer)))
             {
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(checkTime);
+                continue;
             }
 
             Debug.Log("Updating point");
@@ -107,7 +125,7 @@ public class RespawnPlane : MonoBehaviour
             {
                 float dist = point.GetComponent<RespawnPoint>().distToPlayer;
 
-                if (dist > nearestPointDist)
+                if (dist < nearestPointDist)
                 {
                     nearestPoint = point;
                     nearestPointDist = dist;
@@ -128,9 +146,10 @@ public class RespawnPlane : MonoBehaviour
         // Have this be invoked to have a small delay with a crossfade.
 
         // This is the single dumbest thing I've ever had to do.
-        player.enabled = false;
+        //player.enabled = false;
+        Debug.Log("Respawning");
         player.transform.position = nearestPoint.transform.position;
-        player.enabled = true;
+        //player.enabled = true;
     }
 
     /// <summary>

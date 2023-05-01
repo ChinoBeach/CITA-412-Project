@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject menuScreen;
     [SerializeField] GameObject exitScreen;
     [SerializeField] GameObject optionScreen;
+    [SerializeField] LevelLoader levelLoader;
     #endregion
 
     #region Public Methods
@@ -17,12 +18,13 @@ public class MainMenu : MonoBehaviour
 
     public void NewGame()
     {
-        // TODO: Load the main scene
+        levelLoader.LoadScene(1);
     }
 
     public void ContinueGame()
     {
         // TODO: Load save file in player prefs and load main scene
+        NewGame();
     }
     public void OptionsButton()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class RespawnPoint : MonoBehaviour
 {
     #region Variables
@@ -16,7 +16,7 @@ public class RespawnPoint : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerController>().gameObject;
+        player = PlayerController.Instance.gameObject;
     }
 
     private void Update()
@@ -26,7 +26,7 @@ public class RespawnPoint : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(gameObject.transform.position, player.transform.position);
+       Gizmos.DrawLine(gameObject.transform.position, GameObject.FindObjectOfType<PlayerController>().gameObject.transform.position);
     }
 
     #endregion
