@@ -19,7 +19,7 @@ public class PlayerAttacks : MonoBehaviour
     private bool bol_isCasting = false;
 
     //player input system
-    private PlayerInputActions playerInput;
+    private PlayerInput playerInput;
     private InputAction castSpellInput;
 
     //spell casting timers
@@ -30,23 +30,23 @@ public class PlayerAttacks : MonoBehaviour
     private void Awake()
     {
         //connect the player input actions to the class
-        playerInput = new PlayerInputActions();
-        castSpellInput = playerInput.FindAction("Spell Cast");
+        playerInput = GetComponent< PlayerInput>();
+        castSpellInput = playerInput.actions["Spell Cast"];
 
     }// end awake method
 
-    // OnEnable is called to turn on player input actions
+    /* OnEnable is called to turn on player input actions
     private void OnEnable()
     {
         playerInput.Enable();
         
-    }// end OnEnable method
+    }// end OnEnable method 
 
     //OnDisable is called to turn off player input actions
     private void OnDisable()
     {
         playerInput.Disable();
-    }
+    } */
 
     // Update is called once per frame
     void Update()
@@ -61,6 +61,8 @@ public class PlayerAttacks : MonoBehaviour
             bol_isCasting = true;
             //set the time casting to 0 because we just started the cast
             flt_currentTimeCasting = 0;
+            //cast the spell
+            CastSpell();
             
         }
         //if you are casting
