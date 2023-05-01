@@ -40,7 +40,7 @@ public class Spell : MonoBehaviour
         {
 
             //move the spell forward
-            transform.Translate(transform.forward * CurrentSpellCasting.flt_movementSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * CurrentSpellCasting.flt_movementSpeed * Time.deltaTime);
             Debug.Log(transform.forward);
         }
 
