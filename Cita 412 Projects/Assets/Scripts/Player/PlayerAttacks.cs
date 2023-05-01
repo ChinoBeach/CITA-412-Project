@@ -84,8 +84,9 @@ public class PlayerAttacks : MonoBehaviour
     // Cast Spell is called when the player presses the spell attack button
     void CastSpell()
     {
+        
         //create/cast the spell
-        Instantiate(spellPrepared, pos_castPoint.position, pos_castPoint.rotation);
+        Instantiate(spellPrepared, pos_castPoint.position, gameObject.transform.rotation);
         
 
     }//end castspell method

@@ -38,9 +38,10 @@ public class Spell : MonoBehaviour
         //if the spell has a movement speed
         if (CurrentSpellCasting.flt_movementSpeed > 0)
         {
+
             //move the spell forward
             transform.Translate(transform.forward * CurrentSpellCasting.flt_movementSpeed * Time.deltaTime);
-
+            Debug.Log(transform.forward);
         }
 
     }
@@ -48,7 +49,12 @@ public class Spell : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If it hits an enemy
-        //deal damage
+        if (other.gameObject.CompareTag("Enemy")) // ||boss enemy :)
+        {
+            //deal damage
+
+        }
+        
 
         //destroy the object when it hits something
         Destroy(this.gameObject);
