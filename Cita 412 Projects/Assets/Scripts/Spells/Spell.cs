@@ -52,10 +52,11 @@ public class Spell : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy")) // ||boss enemy :)
         {
             //get the enemies health
-            EnemyHealth enemyHealth = GetComponent<EnemyHealth>();
+            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
 
             //deal damage
             enemyHealth.DealDamage(CurrentSpellCasting.flt_Damage);
+            Debug.Log("hit enemy");
 
         }
         
