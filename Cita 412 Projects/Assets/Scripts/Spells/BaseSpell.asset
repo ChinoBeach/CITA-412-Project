@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b07c484c945643c4b9a4554d0527ae7e, type: 3}
   m_Name: BaseSpell
-  m_EditorClassIdentifier: Assembly-CSharp::SpellScriptableObject
+  m_EditorClassIdentifier: 
   flt_Damage: 10
   flt_ManaCost: 5
   flt_Duration: 2
