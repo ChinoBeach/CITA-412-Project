@@ -60,8 +60,7 @@ public class Spell : MonoBehaviour
 
         }
         
-
         //destroy the object when it hits something
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
