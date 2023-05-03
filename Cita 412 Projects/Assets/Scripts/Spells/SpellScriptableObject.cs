@@ -11,5 +11,6 @@ public class SpellScriptableObject : ScriptableObject
     public float flt_Duration = 2f;
     public float flt_movementSpeed = 15f;
     public float flt_SpellRadius = 0.5f;
-  
+
+    public AudioClip hitSoundEffect;
 }// end of class 

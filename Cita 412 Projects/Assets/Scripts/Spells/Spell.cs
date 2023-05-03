@@ -16,6 +16,8 @@ public class Spell : MonoBehaviour
     private SphereCollider spellCollider;
     private Rigidbody spellRigidbody;
 
+    private AudioSource spellAudioPlayer;
+
     private void Awake()
     {
         //set the collider up
@@ -28,6 +30,8 @@ public class Spell : MonoBehaviour
         spellRigidbody = GetComponent<Rigidbody>();
         spellRigidbody.isKinematic = true;
 
+        spellAudioPlayer = GetComponent<AudioSource>();
+
         //destroy the spell if the time is up (incase it didnt hit anything)
         Destroy(this.gameObject, CurrentSpellCasting.flt_Duration);
     }
@@ -38,12 +42,9 @@ public class Spell : MonoBehaviour
         //if the spell has a movement speed
         if (CurrentSpellCasting.flt_movementSpeed > 0)
         {
-
             //move the spell forward
             transform.Translate(Vector3.forward * CurrentSpellCasting.flt_movementSpeed * Time.deltaTime);
-            Debug.Log(transform.forward);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,9 +57,26 @@ public class Spell : MonoBehaviour
 
             //deal damage
             enemyHealth.DealDamage(CurrentSpellCasting.flt_Damage);
-            Debug.Log("hit enemy");
-
         }
+
+        StartCoroutine(DestroyObject());
+    }
+
+    IEnumerator DestroyObject() {
+        // Disable the visual element of the spell object
+        GetComponentInChildren<MeshRenderer>().enabled = false;
+
+        // Set audio clip to the hit sound effect
+        spellAudioPlayer.clip = CurrentSpellCasting.hitSoundEffect;
+
+        // Disable audio source looping
+        spellAudioPlayer.loop = false;
+
+        // Play hit sound effect
+        spellAudioPlayer.Play();
+
+        // Wait for clip to complete
+        yield return new WaitForSeconds(CurrentSpellCasting.hitSoundEffect.length);
         
         //destroy the object when it hits something
         Destroy(gameObject);

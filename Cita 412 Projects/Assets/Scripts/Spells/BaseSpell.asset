@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flt_Damage: 10
   flt_ManaCost: 5
-  flt_Duration: 2
+  flt_Duration: 99
   flt_movementSpeed: 15
   flt_SpellRadius: 0.5
+  hitSoundEffect: {fileID: 8300000, guid: 1e07feca8ebb8df42bf884764bf6aac0, type: 3}
+  travelingSoundEffect: {fileID: 8300000, guid: a2e8e217815c23b4e9e187f93fa3d759, type: 3}
