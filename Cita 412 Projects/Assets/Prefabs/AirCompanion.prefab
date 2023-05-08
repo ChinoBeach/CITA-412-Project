@@ -146,18 +146,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetResetTimer: 0
-  attackDistance: 1.5
+  attackDistance: 2
   playerFollowDistance: 5
-  attackResetTime: 4.5
+  attackResetTime: 5
+  companionDamage: 10
   interactableMask:
     serializedVersion: 2
     m_Bits: 512
   interactionPointRadius: 10
   interactionPoint: {fileID: 768994}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
   numFound: 0
   targetPosition: {fileID: 0}
   playerPosition: {fileID: 0}
-  speed: 5
+  speed: 7
   nextWaypointDistance: 3
   repathRate: 0.5
   reachedEndOfPath: 0

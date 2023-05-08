@@ -87,6 +87,8 @@ public class CompanionAI : MonoBehaviour {
     }
 
     public void Update () {
+        if (!targetPosition) targetPosition = playerPosition;
+        
         // If the distance between the player and companion is too much set target to player
         if (GetPlayerDistance() >= MAX_PLAYER_DISTANCE) SetTarget(playerPosition);
         if (GetPlayerDistance() >= PLAYER_TELEPORT_DISTANCE) TeleportToPlayer();
@@ -209,7 +211,9 @@ public class CompanionAI : MonoBehaviour {
     }
 
     void Attack() {
+        if (!targetPosition.CompareTag("Enemy")) return;
         isAttacking = true;
+        targetPosition.GetComponent<EnemyHealth>().DealDamage(companionDamage);
         StartCoroutine(ResetIsAttacking());
     }
 

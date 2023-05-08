@@ -1199,14 +1199,6 @@ PrefabInstance:
       value: AirCompanion
       objectReference: {fileID: 0}
     - target: {fileID: 3169969505155782125, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169969505155782125, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
-      propertyPath: attackDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169969505155782125, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
       propertyPath: playerPosition
       value: 
       objectReference: {fileID: 323017013}
@@ -1214,17 +1206,5 @@ PrefabInstance:
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 323017013}
-    - target: {fileID: 3169969505155782125, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
-      propertyPath: attackResetTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169969505155782125, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
-      propertyPath: companionDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3169969505155782125, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
-      propertyPath: layerMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1fb99752bbd37b478ce13868795e681, type: 3}
