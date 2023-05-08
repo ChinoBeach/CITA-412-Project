@@ -12,6 +12,8 @@ public class CompanionAI : MonoBehaviour {
     [SerializeField] float targetResetTimer;
     [SerializeField] float attackDistance;
     [SerializeField] float playerFollowDistance;
+    [SerializeField] float attackResetTime;
+    [SerializeField] float companionDamage;
 
     [SerializeField] LayerMask interactableMask;
     [SerializeField] float interactionPointRadius;
@@ -22,7 +24,7 @@ public class CompanionAI : MonoBehaviour {
     private bool isAttacking = false;
     private bool isGameOver = false;
 
-    int layerMask;
+    [SerializeField] LayerMask layerMask;
     [SerializeField] private int numFound;
 
     Vector3 moveDir;
@@ -65,9 +67,6 @@ public class CompanionAI : MonoBehaviour {
         controller = GetComponent<CharacterController>();
 
         animator = GetComponent<Animator>();
-
-        // Bit shift layer mask to layer 9 to only check for hits on enemy layer
-        layerMask = 1 << 9;
     }
 
     public void OnPathComplete (Path p) {
@@ -211,12 +210,12 @@ public class CompanionAI : MonoBehaviour {
 
     void Attack() {
         isAttacking = true;
-        animator.SetTrigger("Base_Attack");
-        Debug.Log("Attack target");
+        StartCoroutine(ResetIsAttacking());
     }
 
     // Resets isAttacking on last frame of attack animation
-    void ResetIsAttacking() {
+    IEnumerator ResetIsAttacking() {
+        yield return new WaitForSeconds(attackResetTime);
         isAttacking = false;
     }
 
@@ -234,5 +233,6 @@ public class CompanionAI : MonoBehaviour {
         // Draws the interact sphere
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(interactionPoint.position, interactionPointRadius);
+        Gizmos.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * attackDistance);
     }
 }
