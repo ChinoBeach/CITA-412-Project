@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerStats : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxPlayerMana = 100f;
     [SerializeField] private float manaRegenRate = 2f;
 
+    [SerializeField] private LevelLoader levelLoader;
     
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI healthText;
@@ -60,5 +62,7 @@ public class PlayerStats : MonoBehaviour
     void GameOver() {
         // Invoke gameover event
         onGameOver();
+
+        levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
