@@ -21,8 +21,15 @@ public class MusicPlayer : MonoBehaviour
         musicPlayer = GetComponent<AudioSource>();
         
         if (!musicPlayer.clip) Destroy(this.gameObject);
+
+        UpdateMusicVolume();
         
         musicPlayer.loop = true;
         musicPlayer.Play();
+    }
+
+    public void UpdateMusicVolume() {
+        float musicVolume = PlayerPrefs.GetFloat("musicVolumeLevel");
+        musicPlayer.volume = (musicVolume) / 100;
     }
 }
