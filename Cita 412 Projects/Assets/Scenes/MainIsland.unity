@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1039,6 +1039,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 8773529243821942115}
+    - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
+      propertyPath: levelLoader
+      value: 
+      objectReference: {fileID: 6232535753049089262}
+    - target: {fileID: 323017016, guid: 0318736a24753e14e846ccc15c775d3c, type: 3}
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 488109426}
@@ -1305,6 +1313,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+--- !u!114 &8773529243821942115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8773529243400149538, guid: dada8a2eb5f3b9546ac168347871e27d, type: 3}
+  m_PrefabInstance: {fileID: 8773529243821942114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9044036225739901520
 PrefabInstance:
   m_ObjectHideFlags: 0
