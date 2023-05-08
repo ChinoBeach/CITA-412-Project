@@ -348,12 +348,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4299085937180213304}
-  - component: {fileID: 6681759732270329809}
-  - component: {fileID: 281759159280068556}
-  m_Layer: 0
-  m_Name: Cube.002
-  m_TagString: Untagged
+  - component: {fileID: 2147521050031186662}
+  - component: {fileID: 2287874425239329149}
+  - component: {fileID: 8508156477181630538}
+  - component: {fileID: 9028161354806790798}
+  - component: {fileID: 3319051065948337439}
+  - component: {fileID: 644215214}
+  - component: {fileID: 1246648791}
+  - component: {fileID: 1246648792}
+  - component: {fileID: 1246648793}
+  - component: {fileID: 2058540358}
+  - component: {fileID: 749112254}
+  m_Layer: 9
+  m_Name: Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
